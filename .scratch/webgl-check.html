@@ -1,0 +1,6 @@
+<!doctype html><html><body style="margin:0"><script src="../three.min.js"></script><script>
+const r=new THREE.WebGLRenderer();r.setSize(400,300);document.body.appendChild(r.domElement);
+const s=new THREE.Scene();s.background=new THREE.Color(0x3366cc);const c=new THREE.PerspectiveCamera(60,4/3,0.1,100);c.position.z=3;
+const m=new THREE.Mesh(new THREE.BoxGeometry(1,1,1),new THREE.MeshNormalMaterial());m.rotation.set(.5,.5,0);s.add(m);r.render(s,c);
+document.title='OK '+r.getContext().getParameter(r.getContext().VERSION);
+</script></body></html>

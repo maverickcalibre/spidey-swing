@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<head>
+  <link rel="stylesheet" href="/css/material_icons.css">
+  <link rel="stylesheet" href="/css/roboto.css">
+  <link rel="stylesheet" href="/css/material_design_lite.css">
+  <link rel="stylesheet" href="log.css">
+  <script src="/mdl_all_js_compiled.js"></script>
+  <script src="log_script.js"></script>
+  <meta charset="utf-8">
+  <title data-i18n="real_time_log">(Loading)</title>
+</head>
+<html>
+  <body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--no-drawer-button">
+      <header class="mdl-layout__header">
+        <div id="header" class="mdl-layout__header-row">
+          <span data-i18n="real_time_log" class="mdl-layout__title">(Loading)</span>
+          <div class="mdl-layout-spacer"></div>
+          <div class="mdl-layout-icon">
+            <label for="keep-alive-checkbox" class="mdl-checkbox mdl-js-checkbox">
+              <input type="checkbox" id="keep-alive-checkbox" class="mdl-checkbox__input"></input>
+              <span data-i18n="keep_alive" class="mdl-checkbox__label"></span>
+            </label>
+          </div>
+          <div class="mdl-layout-icon">
+            <button data-i18n="clear_log" id="clear-log" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"></button>
+          </div>
+        </div>
+      </header>
+      <main class="mdl-layout__content">
+        <div id="log-buffer">
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

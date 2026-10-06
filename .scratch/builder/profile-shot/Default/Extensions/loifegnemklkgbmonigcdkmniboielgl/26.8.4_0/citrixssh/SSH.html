@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Citrix SSH</title>
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="vendor/bootstrap.min.css" />
+	<link rel="stylesheet" href="SSH.css" />
+	<link rel="stylesheet" href="node_modules/@xterm/xterm/css/xterm.css" />
+
+	<!-- jQuery, Popper, Bootstrap JS (required by event-handlers.js and modals) -->
+	<script src="vendor/jquery-3.3.1.slim.min.js"></script>
+	<script src="vendor/popper.min.js"></script>
+	<script src="vendor/bootstrap.min.js"></script>
+
+	<!-- Xterm.js and addons (required for WASM) -->
+	<script src="node_modules/@xterm/xterm/lib/xterm.js"></script>
+	<script src="node_modules/@xterm/addon-fit/lib/addon-fit.js"></script>
+	<script src="node_modules/@xterm/addon-web-links/lib/addon-web-links.js"></script>
+	<script src="node_modules/@xterm/addon-search/lib/addon-search.js"></script>
+	<script src="node_modules/@xterm/addon-serialize/lib/addon-serialize.js"></script>
+
+  <!-- Load WASM runtime -->
+  <script src="js/ssh_logger_bridge.js"></script>
+  <script src="wasm_exec.js"></script>
+  <script src="js/websocket-bridge.js"></script>
+  <script src="js/terminal.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/connection.js"></script>
+  <script src="js/event-handlers.js"></script>
+  <script src="js/wasm-loader.js"></script>
+  <script src="js/app.js"></script>
+  <!-- Load SSHAuthentication module (loaded after WASM starts) -->
+  <script src="js/ssh_client.js" defer></script>
+</head>
+
+<body>
+	<!-- Access Denied Screen (shown only for WebSocket close code 4403) -->
+	<div id="accessDeniedScreen" class="access-denied-screen" style="display: none;">
+		<div class="access-denied-content">
+			<img class="access-denied-illustration" src="../../Resources/Images/citrix_spa_deny.svg" alt="Access denied" data-i18n="[alt]tools.accessDenied.title" />
+			<div class="access-denied-title" data-i18n="tools.accessDenied.title">Access denied</div>
+			<div class="access-denied-subtitle" data-i18n="ssh.accessDenied.subtitle">Your administrator has restricted access to this SSH Server</div>
+			<button id="accessDeniedBackToLogin" type="button" class="access-denied-button" data-i18n="tools.accessDenied.backToLogin">Back to login</button>
+		</div>
+		<div class="access-denied-footer"><span data-i18n="tools.footer.poweredBy">Powered by</span> <img class="access-denied-footer-logo" src="../../Resources/Images/citrix-logo.svg" alt="Citrix" /></div>
+	</div>
+
+	<div class="split-container">
+		<div class="left-panel">
+			<div class="logo-title">
+				<img src="../../Resources/Images/ssh_client_branding_icon.svg" alt="Citrix SSH Client"
+					class="citrix-ssh-client-logo" />
+			</div>
+			<div class="background-symbol">
+				<img src="../../Resources/Images/citrix_brand_icon.svg" alt="Citrix Brand Icon" />
+			</div>
+		</div>
+		<div class="right-panel">
+			<div class="main-content">
+				<div class="connect-title" data-i18n="ssh.connect.title">Connect to SSH Server</div>
+				<div class="columns">
+					<div class="favourites-section">
+						<div class="favourites-title-row">
+							<img src="../../Resources/Images/citrix_ssh_favourite_icon.svg" alt="Favourites Icon" />
+							<div class="favourites-header" data-i18n="tools.favorites.header">Favourites</div>
+						</div>
+						<hr>
+						<div class="favourites-content">
+							<img src="../../Resources/Images/citrix_gray_favourite_icon.svg" alt="Star"
+								style="width:40px;height:40px;margin-bottom:8px;" />
+							<div class="no-fav-title" data-i18n="tools.favorites.emptyTitle">No favourites added yet</div>
+							<div class="no-fav-desc" data-i18n="tools.favorites.emptyDesc">Connect to a server and check "add as favorite" for quick access
+							</div>
+						</div>
+						<div class="favourites-list">
+						</div>
+
+						<!-- Hidden template for favorite items -->
+						<template id="favorite-item-template">
+							<div class="favourite-cell">
+								<div class="fav-left">
+									<div class="fav-title-row">
+										<div class="fav-title"></div>
+										<img src="../../Resources/Images/citrix_arrow_up_circle_solid_icon.svg"
+											alt="Launch" />
+									</div>
+									<div class="fav-ip"></div>
+								</div>
+								<div class="fav-actions">
+									<button class="fav-action-btn delete-fav" title="Delete favorite">
+										<img src="../../Resources/Images/citrix_minus_circle_icon.svg" alt="Delete" width="16"
+											height="16" />
+									</button>
+								</div>
+							</div>
+						</template>
+					</div>
+					<div class="connection-section">
+						<div class="connection-title-row">
+							<img src="../../Resources/Images/citrix_ssh_connection_icon.svg" alt="Connection Icon" />
+							<div class="connection-header" data-i18n="tools.connection.header">Connection Details</div>
+						</div>
+						<hr>
+						<form>
+							<label for="ip" data-i18n="ssh.label.host">Enter Hostname/IP address</label>
+							<div class="input-row">
+								<input id="ip" type="text" data-i18n="[placeholder]tools.placeholder.ipAddress" placeholder="E.g. 10.30.40.50" />
+								<input id="port" type="text" data-i18n="[placeholder]tools.placeholder.port" placeholder="Port" value="22" maxlength="5" />
+							</div>
+							<div class="error-row">
+								<div id="ip-port-error" class="error-message"></div>
+							</div>
+							<label for="username" data-i18n="tools.label.username">Username</label>
+							<input id="username" type="text" data-i18n="[placeholder]tools.placeholder.username" placeholder="Enter Username" autocomplete="off" autocapitalize="off" spellcheck="false" />
+							<div id="username-error" class="error-message"></div>
+							<label for="password" data-i18n="tools.label.password">Password</label>
+							<!-- SECURITY: no static name= here; initializeElements() assigns a randomized name at runtime so autofill/credential-manager heuristics can't key off a well-known field name before the TS runs. -->
+							<input id="password" type="password" data-i18n="[placeholder]tools.placeholder.password" placeholder="Enter Password" autocomplete="off" autocapitalize="off" spellcheck="false" />
+							<div id="password-error" class="error-message"></div>
+							<button type="button" class="add-fav-btn">
+								<img src="../../Resources/Images/citrix_add_ssh_favourite_icon.svg" alt="Add as favourite" />
+								<span data-i18n="tools.button.addFavorite">Add as favourite</span>
+							</button>
+							<button type="submit" class="connect-btn">
+								<span class="btn-text" data-i18n="ssh.button.connect">Connect to SSH Server</span>
+								<div class="spinner"></div>
+							</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Hidden terminal container (required by WASM but not displayed) -->
+	<div id="terminal" style="display: none;"></div>
+
+	<!-- Favorite Name Popup Modal -->
+	<div id="favorite-popup-overlay" class="popup-overlay" style="display: none;">
+		<div class="popup-modal">
+			<div class="popup-header">
+				<h3 data-i18n="tools.popup.addToFavorites">Add to Favorites</h3>
+				<button class="popup-close" type="button">&times;</button>
+			</div>
+			<div class="popup-content">
+				<label for="favorite-name-input" data-i18n="tools.popup.favoriteNameLabel">Favorite Name:</label>
+				<input type="text" id="favorite-name-input" class="favorite-name-input" data-i18n="[placeholder]tools.popup.favoriteNamePlaceholder" placeholder="Enter a name"
+					maxlength="50">
+				<div class="connection-info">
+					<span class="connection-label" data-i18n="ssh.popup.connectionLabel">IP Address / Hostname:</span>
+					<span class="connection-value" id="popup-connection-info"></span>
+				</div>
+				<div class="popup-error" id="favorite-name-error" style="display: none;"></div>
+			</div>
+			<div class="popup-actions">
+				<button type="button" class="popup-btn popup-save" data-i18n="tools.popup.add">Add</button>
+				<button type="button" class="popup-btn popup-cancel" data-i18n="tools.popup.cancel">Cancel</button>
+			</div>
+		</div>
+	</div>
+	</div>
+
+	<!-- SSH Error Modal -->
+	<div id="sshErrorModal" class="modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+		<div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+			<div class="modal-content" style="border-radius: 8px; border: 1px solid #d32f2f;">
+				<div class="modal-header"
+					style="border-bottom: 1px solid #e6e6e6; background-color: #f8f9fa; padding: 12px 16px;">
+					<div class="error-header-icon" style="display: flex; align-items: center;">
+						<div class="error-icon"
+							style="background-color: #d32f2f; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 8px;">
+							<span style="color: white; font-weight: bold; font-size: 14px;">!</span>
+						</div>
+						<h5 class="modal-title sr-only" data-i18n="ssh.errorModal.title"></h5>
+					</div>
+				</div>
+				<div class="modal-body" style="padding: 16px;">
+					<div id="sshErrorMessage" style="font-size: 14px; color: #333; line-height: 1.4;">
+						<!-- Error message will be inserted here -->
+					</div>
+				</div>
+				<div class="modal-footer"
+					style="border-top: 1px solid #e6e6e6; padding: 12px 16px; display: flex; justify-content: center;">
+					<button type="button" class="btn btn-primary" id="sshErrorOkBtn"
+						style="min-width: 80px; padding: 6px 16px; font-size: 14px;" data-i18n="tools.popup.ok">OK</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Reconnect Modal -->
+	<div id="reconnectModal" class="modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content" style="border-radius: 14px;">
+				<div class="modal-header" style="border-bottom: 1px solid #e6e6e6;">
+					<h5 class="modal-title" style="font-size: 20px; font-weight: 700;" data-i18n="ssh.modal.authTitle">Authenticate session</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"
+						id="closeReconnectModal">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body" style="padding-top: 16px;">
+					<p id="connLostMsg" data-i18n="ssh.modal.connLostMsg">Your session was disconnected. Enter your password to reconnect.</p>
+					<label for="reconnectPassword" data-i18n="tools.label.password">Password</label>
+					<input type="password" class="form-control" id="reconnectPassword"
+						name="reconnectPassword" data-i18n="[placeholder]tools.placeholder.password" placeholder="Enter your password" autocomplete="off"
+						autocapitalize="off" spellcheck="false" />
+				</div>
+				<div class="modal-footer" style="border-top: 1px solid #e6e6e6;">
+					<button type="button" class="btn btn-primary" id="reconnectYes"
+						onclick="reconnect(true)" data-i18n="ssh.modal.reconnect">Reconnect</button>
+					<button type="button" class="btn btn-link" id="reconnectNo" data-dismiss="modal"
+						onclick="reconnect(false)" data-i18n="tools.popup.cancel">Cancel</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading Security Policies</title>
+    <link rel="stylesheet" href="PolicyLoadingPage.css">
+</head>
+<body>
+    <div id="loading-view" class="view">
+        <div class="loading-container">
+            <div class="globe-wrapper">
+                <img src="../../Resources/Images/citrix_policy_loading_globe.svg" alt="Loading security policies" class="globe-illustration">
+            </div>
+            <div class="loading-text">
+                <img src="../../Resources/Images/policy-loading-spinner.svg" alt="" class="spinner">
+                <span>Getting the policies</span>
+            </div>
+        </div>
+        <div class="footer">
+            <span>Powered by</span>
+            <img src="../../Resources/Images/citrix-logo.svg" alt="Citrix" class="citrix-logo">
+        </div>
+    </div>
+
+    <!-- Error View -->
+    <div id="error-view" class="view hidden">
+        <div class="error-container">
+            <img src="../../Resources/Images/policy-error-icon.svg" alt="Error" class="error-icon">
+            <h1 class="error-title">Failed to retrieve Secure Private Access policies</h1>
+            <p class="error-description">
+                If the issue persists, contact your administrator
+            </p>
+            <button id="retry-button" class="retry-btn">Retry</button>
+        </div>
+        <div class="footer">
+            <span>Powered by</span>
+            <img src="../../Resources/Images/citrix-logo.svg" alt="Citrix" class="citrix-logo">
+        </div>
+    </div>
+
+    <script src="../../ssh_logger_bridge.js"></script>
+    <script src="../../PolicyLoadingPage.js"></script>
+</body>
+</html>

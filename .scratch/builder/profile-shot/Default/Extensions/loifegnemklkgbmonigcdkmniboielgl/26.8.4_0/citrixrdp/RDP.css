@@ -1,0 +1,1095 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #f6f7f9;
+  overflow-x: auto;
+}
+
+.access-denied-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  padding: 24px 16px 72px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.access-denied-content {
+  width: 265px;
+  min-height: 329px;
+  margin-top: 40px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+}
+
+.access-denied-illustration {
+  margin: 0 auto 12px;
+  width: 160px;
+  height: 160px;
+}
+
+.access-denied-title {
+  color: #d32f2f;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.access-denied-subtitle {
+  color: #4a4a4a;
+  font-size: 14px;
+  line-height: 20px;
+  margin-bottom: 20px;
+}
+
+.access-denied-button {
+  background: #0B3797;
+  color: #fff;
+  border: 0;
+  border-radius: 8px;
+  height: 40px;
+  width: 100%;
+  padding: 0 18px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.access-denied-button:focus {
+  outline: none;
+}
+
+.access-denied-footer {
+  margin-top: auto;
+  padding-top: 24px;
+  color: #9a9a9a;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+}
+
+.access-denied-footer-logo {
+  height: 12px;
+  width: auto;
+  display: inline-block;
+}
+
+/* Fullscreen: auto-hide the session top bar and reveal on hover-at-top (driven by JS). */
+.rdp-fullscreen #rdp-session-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  transform: translateY(-100%);
+  transition: transform 160ms ease;
+  z-index: 10001;
+}
+
+#rdp-top-hover-zone {
+  display: none;
+}
+
+/* A small hover target at the top edge (browser-style) */
+.rdp-fullscreen #rdp-top-hover-zone {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 20px;
+  /* Keep above the canvas but below the session bar so it doesn't block clicks. */
+  z-index: 10000;
+  background: transparent;
+}
+
+/* Reveal bar when hovering the top edge or the bar itself */
+.rdp-fullscreen #rdp-top-hover-zone:hover + #rdp-session-bar,
+.rdp-fullscreen #rdp-session-bar:hover {
+  transform: translateY(0);
+}
+
+.rdp-session-actions {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  white-space: nowrap;
+}
+
+.rdp-session-fullscreen-toggle {
+  padding: 0;
+  background-color: transparent;
+  color: #00e5ff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  outline: none;
+}
+
+.rdp-session-disconnect {
+  padding: 0;
+  background: transparent;
+  color: #00e5ff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  outline: none;
+}
+
+.rdp-session-disconnect:hover {
+  text-decoration: underline;
+}
+
+#rdp-canvas:focus-visible {
+  outline: 2px solid #00e5ff;
+  outline-offset: 2px;
+}
+
+.split-container {
+  display: flex;
+  height: auto;
+  min-height: 100vh;
+  background: #fff;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.03);
+}
+
+.left-panel {
+  width: 36vw;
+  min-width: 365px;
+  background: linear-gradient(135deg, #002575 0%, #0B3797 50%, #0045DB 100%);
+  color: #fff;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  overflow: hidden;
+}
+
+.logo-title {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 48px;
+  margin-left: 48px;
+}
+
+.citrix-ssh-client-logo {
+  top: 68px;
+  left: 58px;
+  width: 169px;
+  height: 45px;
+  opacity: 1;
+}
+
+.citrix {
+  font-size: 1.07rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+}
+
+.ssh-client {
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.background-symbol {
+  position: absolute;
+  left: 24px;
+  right: 47px;
+  bottom: 0px;
+  width: 294px;
+  height: 281px;
+  mix-blend-mode: overlay;
+}
+
+.background-symbol img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.right-panel {
+  width: 64vw;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
+  padding-top: 80px;
+}
+
+.main-content {
+  width: 80%;
+  max-width: 900px;
+}
+
+.connect-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 38px;
+  margin-top: 0;
+  color: #000;
+  letter-spacing: -0.36px;
+  font-family: inherit;
+  left: 72px;
+}
+
+.columns {
+  display: flex;
+  gap: 105px;
+}
+
+.favourites-section{
+  flex: 1 1 0;
+  min-width: 229px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.connection-section {
+  flex: 1 1 0;
+  min-width: 266px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.favourites-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  justify-content: center;
+}
+
+.favourites-title-row img {
+  width: 20px;
+  height: 20px;
+}
+
+.favourites-header {
+  font-size: 14px;
+  font-weight: 600;
+  font-style: normal;
+  line-height: normal;
+  color: #000;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #e4e8ed;
+  margin: 16px 0;
+  width: 100%;
+  align-self: center;
+}
+
+.favourites-content {
+  text-align: center;
+  color: #AEB4BC;
+  margin-top: 10px;
+  margin-bottom: 18px;
+}
+
+.no-fav-title {
+  font-family: 'Public Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  font-style: normal;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: center;
+  vertical-align: middle;
+  margin-top: 8px;
+  color: #767676;
+}
+
+.no-fav-desc {
+  font-size: 10px;
+  font-style: normal;
+  line-height: normal;
+  font-weight: 400;
+  color: #767676;
+  margin-top: 4px;
+}
+
+.no-fav-icon {
+  width: 32px;
+  height: 32px;
+  margin-bottom: 8px;
+  transform: rotate(0deg);
+  opacity: 1;
+}
+
+/* Favorites list and item styles */
+.favourites-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  max-height: max(240px, calc(100vh - 320px));
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  scrollbar-gutter: stable;
+  padding-right: 8px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
+.favourite-cell {
+  width: 100%;
+  min-height: 52px;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  border-radius: 4px;
+  padding: 10px 8px;
+  box-sizing: border-box;
+  transition: background 0.2s;
+  gap: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  cursor: pointer;
+}
+
+.favourite-cell:hover {
+  background: #f3f5fa;
+}
+
+.fav-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.fav-title-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.fav-title {
+  color: #171717;
+  font-family: "Public Sans", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-top: 2px;
+}
+
+.fav-arrow svg {
+  display: block;
+}
+
+.fav-ip {
+  font-size: 0.87rem;
+  color: #7d8da6;
+  margin-top: 2px;
+  line-height: 1.2;
+  overflow: hidden;
+  word-wrap: break-word;
+}
+
+.rdp-favorite-subtext {
+  color: #7d8da6;
+}
+
+.fav-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 12px;
+}
+
+.fav-action-btn {
+  background: none;
+  border: none;
+  padding: 2px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border-radius: 3px;
+  transition: background 0.15s;
+}
+
+.fav-action-btn:hover {
+  background: #e3e8f0;
+}
+
+.fav-action-btn img {
+  width: 16px;
+  height: 16px;
+  opacity: 0.6;
+  transition: opacity 0.15s ease;
+}
+
+.fav-action-btn:hover img {
+  opacity: 0.9;
+}
+
+.connection-title-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.connection-title-row img {
+  width: 20px;
+  height: 20px;
+}
+
+.connection-header {
+  font-size: 14px;
+  font-weight: 600;
+  font-style: normal;
+  line-height: normal;
+  color: #000;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  width: 100%;
+}
+
+label {
+  font-size: 14px;
+  font-weight: 600;
+  font-style: normal;
+  margin-bottom: 5px;
+  margin-top: 16px;
+  color: #000;
+}
+
+.input-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+/* When zoomed in (or on narrow screens), prefer wrap + horizontal scroll over clipping */
+@media (max-width: 1100px) {
+  .split-container {
+    min-width: 1100px;
+  }
+
+  .columns {
+    gap: 48px;
+  }
+
+  .input-row {
+    flex-wrap: wrap;
+    align-items: stretch;
+  }
+
+  #port {
+    max-width: none;
+    min-width: 80px;
+  }
+
+  .error-message {
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+}
+
+/* Error message styling */
+.error-message {
+  font-size: 12px;
+  color: #e74c3c;
+  margin-top: 4px;
+  margin-bottom: 8px;
+  min-height: 16px;
+  display: none;
+  font-weight: 400;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+.error-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+  width: 100%;
+}
+
+.error-row .error-message {
+  width: 100%;
+  min-width: 0;
+}
+
+/* Input field error state styling */
+input.error {
+  border-color: #e74c3c !important;
+  box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.2) !important;
+}
+
+input[type="text"], input[type="password"] {
+  padding: 10px 12px;
+  font-size: 1rem;
+  border: 1.5px solid #b8bcc2;
+  border-radius: 7px;
+  outline: none;
+  background: #fff;
+  transition: border-color 0.2s;
+  margin-bottom: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+input[type="text"]:focus, input[type="password"]:focus {
+  border-color: #003894;
+}
+
+#port {
+  max-width: 70px;
+  min-width: 50px;
+  flex-shrink: 0;
+}
+
+.add-fav-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #171717;
+  font-size: 1rem;
+  margin-bottom: 16px;
+  margin-top: 16px;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 0;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.add-fav-btn:focus {
+  color: #003894;
+  outline: none;
+  border: none;
+}
+
+.add-fav-btn:active {
+  outline: none;
+  border: none;
+}
+
+.add-fav-btn:hover {
+  color: #003894;
+}
+
+.add-fav-btn:hover img {
+  filter: brightness(1.2);
+}
+
+.add-fav-btn img {
+  width: 18px;
+  height: 18px;
+  transition: filter 0.2s;
+}
+
+.connect-btn {
+  margin-top: 6px;
+  padding: 14px 0;
+  background: #003894;
+  color: #FFF;
+  color: color(display-p3 1 1 1);
+  border: none;
+  border-radius: 6px;
+  font-family: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  transition: background 0.2s, opacity 0.2s;
+  width: 100%;
+  cursor: pointer;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.connect-btn:hover:not(:disabled) {
+  background: #003894;
+}
+
+.connect-btn:disabled,
+.connect-btn.disabled {
+  background: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.connect-btn.loading {
+  background: #003894;
+  position: relative;
+}
+
+.connect-btn .spinner {
+  display: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid transparent;
+  border-top: 2px solid #ffffff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+}
+
+.connect-btn.loading .spinner {
+  display: block;
+}
+
+.connect-btn.loading .btn-text {
+  display: none;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Popup Modal Styles */
+.popup-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1000;
+}
+
+.popup-modal {
+	background: #fff;
+	border-radius: 12px;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+	min-width: 400px;
+	max-width: 500px;
+	width: 100%;
+}
+
+.popup-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 20px 24px 16px;
+	border-bottom: 1px solid #e6e6e6;
+}
+
+.popup-header h3 {
+	margin: 0;
+	font-size: 18px;
+	font-weight: 600;
+	color: #333;
+}
+
+.popup-close {
+	background: none;
+	border: none;
+	font-size: 24px;
+	color: #999;
+	cursor: pointer;
+	padding: 0;
+	width: 24px;
+	height: 24px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.popup-close:hover {
+	color: #666;
+}
+
+.popup-content {
+	padding: 20px 24px;
+}
+
+.popup-content label {
+	display: block;
+	margin-bottom: 8px;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: normal;
+	color: #333;
+}
+
+.favorite-name-input {
+	width: 100%;
+	padding-top: 4px;
+	padding-right: 92px;
+	border: 2px solid #e6e6e6;
+	border-radius: 8px;
+	font-size: 14px;
+	margin-bottom: 16px;
+	box-sizing: border-box;
+}
+
+.favorite-name-input:focus {
+	outline: none;
+	border-color: #0074E6;
+}
+
+.favorite-name-input.error {
+	border-color: #dc3545;
+}
+
+.connection-info {
+	padding-top: 12px;
+	padding-bottom: 21px;
+	border-radius: 6px;
+}
+
+.connection-label {
+	font-weight: 400;
+	color: #555555;
+	display: block;
+	margin-bottom: 4px;
+	font-size: 12px;
+	font-style: normal;
+	line-height: 18px;
+}
+
+.connection-value {
+	font-family: 'Public Sans', sans-serif;
+	color: #171717;
+	font-size: 12px;
+	font-weight: 600;
+	font-style: normal;
+	line-height: 18px;
+}
+
+.popup-error {
+	color: #dc3545;
+	font-size: 12px;
+	margin-top: -12px;
+	margin-bottom: 16px;
+}
+
+.popup-actions {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 8px;
+	padding: 16px 24px 20px;
+	border-top: 1px solid #D9D9D9;
+}
+
+.popup-btn {
+	padding: 10px 20px;
+	border: none;
+	border-radius: 6px;
+	font-size: 14px;
+	font-weight: 500;
+	cursor: pointer;
+	transition: background-color 0.2s;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+}
+
+.popup-save {
+	background: #003894;
+	color: white;
+	width: 108.5px;
+	height: 32px;
+	border-radius: 6px;
+	box-sizing: border-box;
+	justify-content: center;
+}
+
+.popup-save:hover {
+	background: #003894;
+}
+
+.popup-cancel {
+	background: #fff;
+	color: #003894;
+}
+
+.popup-cancel:hover {
+	background: #fff;
+}
+
+/* Reconnect Modal Styles */
+#reconnectModal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100001; /* Higher than canvas container (9999) */
+  background-color: rgba(0, 0, 0, 0.6);
+  overflow: auto;
+}
+
+#reconnectModal.show {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+#reconnectModal .modal-dialog {
+  position: relative;
+  margin: auto;
+  max-width: 500px;
+  width: 90%;
+}
+
+#reconnectModal .modal-content {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#reconnectModal .modal-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#reconnectModal .modal-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+#reconnectModal .close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #666;
+  cursor: pointer;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+#reconnectModal .close:hover {
+  opacity: 1;
+}
+
+#reconnectModal .modal-body {
+  padding: 20px;
+  font-size: 14px;
+  color: #555;
+  line-height: 1.6;
+}
+
+#reconnectModal .modal-footer {
+  padding: 16px 20px;
+  border-top: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+#reconnectModal .btn {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+#reconnectModal .btn-primary {
+  background-color: #0078D4;
+  color: white;
+}
+
+#reconnectModal .btn-primary:hover {
+  background-color: #005a9e;
+}
+
+#reconnectModal .btn-secondary {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+#reconnectModal .btn-secondary:hover {
+  background-color: #d0d0d0;
+}
+
+/* Disconnect Confirmation Modal Styles */
+#disconnectModal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100001;
+  background-color: rgba(0, 0, 0, 0.6);
+  overflow: auto;
+}
+
+#disconnectModal.show {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+#disconnectModal .modal-dialog-disconnect {
+  position: relative;
+  margin: auto;
+  max-width: 500px;
+  width: 90%;
+}
+
+#disconnectModal .modal-content {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+#disconnectModal .modal-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#disconnectModal .modal-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+#disconnectModal .close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #666;
+  cursor: pointer;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+#disconnectModal .close:hover {
+  opacity: 1;
+}
+
+#disconnectModal .disconnect-body {
+  padding: 20px;
+  font-size: 14px;
+  color: #555;
+  line-height: 1.6;
+}
+
+#disconnectModal .disconnect-body p {
+  margin: 0;
+}
+
+#disconnectModal .modal-footer {
+  padding: 16px 20px;
+  border-top: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+#disconnectModal .btn {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+#disconnectModal .btn-disconnect-ok {
+  background-color: #0078D4;
+  color: white;
+}
+
+#disconnectModal .btn-disconnect-ok:hover {
+  background-color: #005a9e;
+}
+
+#disconnectModal .btn-secondary {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+#disconnectModal .btn-secondary:hover {
+  background-color: #d0d0d0;
+}

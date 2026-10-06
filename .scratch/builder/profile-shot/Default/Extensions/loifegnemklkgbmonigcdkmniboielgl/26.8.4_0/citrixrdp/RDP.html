@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Citrix RDP</title>
+
+	<!-- Bootstrap (if your CSS uses it) -->
+	<link rel="stylesheet" href="vendor/bootstrap.min.css" />
+	<link rel="stylesheet" href="RDP.css" />
+
+	<!-- jQuery/Bootstrap JS (only if modals/UI depend on it) -->
+	<script src="vendor/jquery-3.3.1.slim.min.js"></script>
+	<script src="vendor/popper.min.js"></script>
+	<script src="vendor/bootstrap.min.js"></script>
+
+	<!-- RDP session vendor bundle -->
+	<script src="../ui/js/vendor.js"></script>
+
+	<!-- Logger bridge for unified logging (exposes global sshLogger) -->
+	<script src="js/ssh_logger_bridge.js"></script>
+
+	<!-- RDP session app bundle (must load after logger bridge) -->
+	<script src="../ui/js/session.js"></script>
+	<!-- <script src="../ui/js/rdp_auth_defaults.js"></script> -->
+	<!-- RDP Authentication Manager (TypeScript compiled version) -->
+	<script src="js/rdp_auth_manager.js"></script>
+
+</head>
+
+<body>
+	<!-- Access Denied Screen (shown only for WebSocket close code 4403) -->
+	<div id="accessDeniedScreen" class="access-denied-screen" style="display: none;" aria-hidden="true">
+		<div class="access-denied-content">
+			<img class="access-denied-illustration" src="../../Resources/Images/citrix_spa_deny.svg" alt="Access denied" data-i18n="[alt]tools.accessDenied.title" />
+			<div class="access-denied-title" data-i18n="tools.accessDenied.title">Access denied</div>
+			<div class="access-denied-subtitle" data-i18n="rdp.accessDenied.subtitle">Your administrator has restricted access to Remote Desktop</div>
+			<button id="accessDeniedBackToLogin" type="button" class="access-denied-button" data-i18n="tools.accessDenied.backToLogin">Back to login</button>
+		</div>
+		<div class="access-denied-footer"><span data-i18n="tools.footer.poweredBy">Powered by</span> <img class="access-denied-footer-logo" src="../../Resources/Images/citrix-logo.svg" alt="Citrix" /></div>
+	</div>
+
+	<div class="split-container">
+		<div class="left-panel">
+			<div class="logo-title">
+				<img src="../../Resources/Images/rdp_client_branding_icon.svg" alt="Citrix RDP Client"
+					class="citrix-rdp-client-logo" />
+			</div>
+			<div class="background-symbol">
+				<img src="../../Resources/Images/citrix_brand_icon.svg" alt="Citrix Brand Icon" />
+			</div>
+		</div>
+		<div class="right-panel">
+			<div class="main-content">
+				<div class="connect-title" data-i18n="rdp.connect.title">Connect to Remote Desktop</div>
+				<div class="columns">
+					<div class="favourites-section">
+						<div class="favourites-title-row">
+							<img src="../../Resources/Images/citrix_ssh_favourite_icon.svg" alt="Favourites Icon" />
+							<div class="favourites-header" data-i18n="tools.favorites.header">Favourites</div>
+						</div>
+						<hr>
+						<div class="favourites-content">
+							<img src="../../Resources/Images/citrix_gray_favourite_icon.svg" alt="Star"
+								style="width:40px;height:40px;margin-bottom:8px;" />
+							<div class="no-fav-title" data-i18n="tools.favorites.emptyTitle">No favourites added yet</div>
+							<div class="no-fav-desc" data-i18n="tools.favorites.emptyDesc">Connect to a server and check "add as favorite" for quick access
+							</div>
+						</div>
+						<div class="favourites-list">
+						</div>
+
+						<!-- Hidden template for favorite items -->
+						<template id="favorite-item-template">
+							<div class="favourite-cell">
+								<div class="fav-left">
+									<div class="fav-title-row">
+										<div class="fav-title"></div>
+										<img src="../../Resources/Images/citrix_arrow_up_circle_solid_icon.svg"
+											alt="Launch" />
+									</div>
+									<div class="fav-ip"></div>
+								</div>
+								<div class="fav-actions">
+									<button class="fav-action-btn delete-fav" title="Delete favorite">
+										<img src="../../Resources/Images/citrix_minus_circle_icon.svg" alt="Delete" width="16"
+											height="16" />
+									</button>
+								</div>
+							</div>
+						</template>
+					</div>
+					<div class="connection-section">
+						<div class="connection-title-row">
+							<img src="../../Resources/Images/citrix_ssh_connection_icon.svg" alt="Connection Icon" />
+							<div class="connection-header" data-i18n="tools.connection.header">Connection Details</div>
+						</div>
+						<hr>
+						<form>
+							<label for="ip" data-i18n="rdp.label.serverAddress">Server Address</label>
+							<div class="input-row">
+								<input id="ip" type="text" data-i18n="[placeholder]tools.placeholder.ipAddress" placeholder="E.g. 10.30.40.50" />
+								<input id="port" type="text" data-i18n="[placeholder]tools.placeholder.port" placeholder="Port" value="3389" maxlength="5" />
+							</div>
+							<div class="error-row">
+								<div id="ip-port-error" class="error-message"></div>
+							</div>
+							<label for="username" data-i18n="tools.label.username">Username</label>
+							<input id="username" type="text" data-i18n="[placeholder]tools.placeholder.username" placeholder="Enter Username" />
+							<div id="username-error" class="error-message"></div>
+							<label for="password" data-i18n="tools.label.password">Password</label>
+							<input id="password" type="password" data-i18n="[placeholder]tools.placeholder.password" placeholder="Enter Password" />
+							<label for="domain" data-i18n="rdp.label.domain">Domain (Optional)</label>
+							<input id="domain" type="text" data-i18n="[placeholder]rdp.placeholder.domain" placeholder="Enter Domain name" />
+							<div id="password-error" class="error-message"></div>
+							<button type="button" class="add-fav-btn">
+								<img src="../../Resources/Images/citrix_add_ssh_favourite_icon.svg" alt="Add as favourite" />
+								<span data-i18n="tools.button.addFavorite">Add as favourite</span>
+							</button>
+							<button type="submit" class="connect-btn" data-i18n="rdp.button.connect">Connect</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- RDP Canvas container (shown when connected) -->
+	<div id="rdp-canvas-container"
+		style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #1e1e1e; z-index: 9999; flex-direction: column;">
+		<div id="rdp-top-hover-zone" aria-hidden="true"></div>
+		<div id="rdp-session-bar" class="rdp-session-bar"
+			style="padding: 8px 20px; background-color: #252525; border-bottom: 1px solid #3e3e3e; display: flex; justify-content: space-between; align-items: center;">
+			<div>
+				<h1 style="margin: 0; font-size: 18px; color: #ffffff;" data-i18n="rdp.session.title">RDP Session</h1>
+				<p id="rdp-status" style="margin: 4px 0 0 0; font-size: 13px; opacity: 0.7; color: #ffffff;" data-i18n="rdp.session.connecting">
+					Connecting...</p>
+			</div>
+			<div class="rdp-session-actions">
+				<button id="rdp-fullscreen-toggle-btn" type="button" class="rdp-session-fullscreen-toggle">
+					<svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" focusable="false"
+						style="display: block;" fill="none">
+						<line x1="19" y1="5" x2="14" y2="10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+						<polyline points="15 5 19 5 19 9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+						<line x1="10" y1="14" x2="5" y2="19" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+						<polyline points="5 15 5 19 9 19" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+					</svg>
+					<span id="rdp-fullscreen-toggle-label" data-i18n="rdp.session.toggleFullscreen">Toggle fullscreen</span>
+				</button>
+				<button id="rdp-disconnect-btn" type="button" class="rdp-session-disconnect">
+					<svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true" focusable="false" style="display: block;" fill="none">
+						<line x1="4" y1="4" x2="12" y2="12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+						<line x1="12" y1="4" x2="4" y2="12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+					</svg>
+					<span data-i18n="rdp.session.disconnect">Disconnect</span>
+				</button>
+			</div>
+		</div>
+
+		<!-- Loading spinner overlay (shown during connection) -->
+		<div id="rdp-loading-overlay"
+			style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 16px; background: #1e1e1e; z-index: 10000;">
+			<div
+				style="width: 48px; height: 48px; border: 4px solid #3e3e3e; border-top: 4px solid #0078D4; border-radius: 50%; animation: spin 1s linear infinite;">
+			</div>
+			<p id="rdp-loading-text" style="font-size: 14px; opacity: 0.7; color: #ffffff; margin: 0;" data-i18n="rdp.session.connecting">Connecting...</p>
+			<style>
+				@keyframes spin {
+					0% {
+						transform: rotate(0deg);
+					}
+
+					100% {
+						transform: rotate(360deg);
+					}
+				}
+			</style>
+		</div>
+
+		<div id="rdp-canvas-wrapper" style="flex: 1; display: flex; width: 100%; overflow: hidden; background: #1e1e1e;">
+			<canvas id="rdp-canvas" style="width: 100%; height: 100%; object-fit: contain;"></canvas>
+		</div>
+
+		<!-- Network Reconnect Modal (inside canvas container) -->
+		<div id="reconnectModal" class="modal" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" data-i18n="rdp.modal.reconnecting">Reconnecting</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"
+							id="closeReconnectModal">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div id="connLostMsg" class="modal-body" data-i18n="rdp.modal.connLostMsg">
+						Connection lost. Failed to connect. Verify the network is available and try again.
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" data-dismiss="modal" id="reconnectYes" data-i18n="rdp.modal.retry">
+							Retry
+						</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal" id="reconnectNo" data-i18n="tools.popup.cancel">
+							Cancel
+						</button>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		<!-- Disconnect Confirmation Modal (inside canvas container)-->
+		<div id="disconnectModal" class="modal" tabindex="-1" role="dialog">
+			<div class="modal-dialog modal-dialog-disconnect" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" data-i18n="rdp.modal.disconnectTitle">Disconnect?</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"
+							id="closeDisconnectModal">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body disconnect-body">
+							<p data-i18n="rdp.modal.disconnectMessage">Applications on the remote desktop will continue to run after disconnecting. You can reconnect to the remote session later by logging in again.</p>
+					</div>
+					<div class="modal-footer disconnect-footer">
+						<button type="button" class="btn btn-primary btn-disconnect-ok" id="disconnectOk" data-i18n="rdp.session.disconnect">
+							Disconnect 
+						</button>
+						<button type="button" class="btn btn-secondary" id="disconnectCancel" data-i18n="tools.popup.cancel">
+							Cancel
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<!-- Favorite Name Popup Modal -->
+	<div id="favorite-popup-overlay" class="popup-overlay" style="display: none;">
+		<div class="popup-modal">
+			<div class="popup-header">
+				<h3 data-i18n="tools.popup.addToFavorites">Add to Favorites</h3>
+				<button class="popup-close" type="button">&times;</button>
+			</div>
+			<div class="popup-content">
+				<label for="favorite-name-input" data-i18n="tools.popup.favoriteNameLabel">Favorite Name:</label>
+				<input type="text" id="favorite-name-input" class="favorite-name-input" data-i18n="[placeholder]tools.popup.favoriteNamePlaceholder" placeholder="Enter a name"
+					maxlength="50">
+				<div class="connection-info">
+					<span class="connection-label" data-i18n="rdp.favorites.serverAddressLabel">Server Address:</span>
+					<span class="connection-value" id="popup-connection-info"></span>
+				</div>
+				<div class="popup-error" id="favorite-name-error" style="display: none;"></div>
+			</div>
+			<div class="popup-actions">
+				<button type="button" class="popup-btn popup-save" data-i18n="tools.popup.add">Add</button>
+				<button type="button" class="popup-btn popup-cancel" data-i18n="tools.popup.cancel">Cancel</button>
+			</div>
+		</div>
+	</div>
+
+	<!-- RDP Error Modal (PuTTY-style) placed outside canvas so it's visible on form UI -->
+	<div id="rdpErrorModal" class="modal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+		<div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+			<div class="modal-content" style="border-radius: 8px; border: 1px solid #d32f2f;">
+				<div class="modal-header" style="border-bottom: 1px solid #e6e6e6; background-color: #f8f9fa; padding: 12px 16px;">
+					<div class="error-header-icon" style="display: flex; align-items: center;">
+						<div class="error-icon" style="width: 22px; height: 22px; background-color: #d32f2f; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 8px;">
+							<span style="color: white; font-weight: bold; font-size: 14px;">!</span>
+						</div>
+						<h5 class="modal-title" style="font-size: 16px; font-weight: 600; margin: 0; color: #333;" data-i18n="rdp.errorModal.title">Fatal Error</h5>
+					</div>
+				</div>
+				<div class="modal-body" style="padding: 16px;">
+					<div id="rdpErrorMessage" style="font-size: 14px; color: #333; line-height: 1.4;"></div>
+				</div>
+				<div class="modal-footer" style="border-top: 1px solid #e6e6e6; padding: 12px 16px; display: flex; justify-content: center;">
+					<button type="button" class="btn btn-primary" id="rdpErrorOkBtn" style="min-width: 80px; padding: 6px 16px; font-size: 14px;" data-i18n="tools.popup.ok">OK</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

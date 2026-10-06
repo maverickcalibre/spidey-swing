@@ -1,0 +1,1 @@
+(()=>{"use strict";const e="SSH_RDP_LOG_TYPE",s={logInfo:(s,o)=>{window.postMessage({type:e,level:"info",module:s,message:o},"*")},logError:(s,o)=>{window.postMessage({type:e,level:"error",module:s,message:o},"*")}};window.sshRdpLogger=s,window.sshRdpModuleName="ssh-js"})();

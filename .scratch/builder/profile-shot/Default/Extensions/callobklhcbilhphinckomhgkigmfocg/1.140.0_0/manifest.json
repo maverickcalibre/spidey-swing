@@ -1,0 +1,45 @@
+{
+   "action": {
+      "default_icon": {
+         "19": "icon_19_normal.png",
+         "38": "icon_38_normal.png"
+      },
+      "default_popup": "popup.html"
+   },
+   "author": {
+      "email": "secureconnect-cws-publishing@google.com"
+   },
+   "background": {
+      "service_worker": "background_service_worker.js"
+   },
+   "content_security_policy": {
+      "extension_pages": "script-src 'self'; object-src 'self'",
+      "sandbox": "sandbox allow-scripts allow-downloads allow-forms allow-popups allow-modals; script-src 'self' 'unsafe-inline' 'unsafe-eval'; child-src 'self'"
+   },
+   "default_locale": "en",
+   "description": "__MSG_extension_description__",
+   "host_permissions": [ "*://*.google.com/*" ],
+   "icons": {
+      "128": "icon_128_normal.png",
+      "19": "icon_19_normal.png",
+      "38": "icon_38_normal.png",
+      "512": "icon_512_normal.png"
+   },
+   "incognito": "not_allowed",
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjXwWSZq5RLuM5ZbmRWn4gXwpMOb52aoOhtzIsmbXUWPQeA6/D2p1uaPxIHh6EusxAhXMrBgNaJv1QFxCxiU1aGDlmCR9mOsA7rK5kmVCi0TYLbQa+C38UDmyhRACrvHO26Jt8qC8oM8yiSuzgb+16rgCCcek9dP7IaHaoJMsBMAEf3VEno4xt+kCAAsFsyFCB4plWid54avqpgg6+OsR3ZtUAMWooVziJHVmBTiyl82QR5ZURYr+TjkiljkPEBLaMTKC2g7tUl2h0Q1UmMTMc2qxLIVVREhr4q9iOegNxfNy78BaxZxI1Hjp0EVYMZunIEI9r1k0vyyaH13TvdeqNwIDAQAB",
+   "manifest_version": 3,
+   "name": "Endpoint Verification",
+   "oauth2": {
+      "client_id": "159084122861-5v2jb9mom4h04piuj12rq5rb2952j98k.apps.googleusercontent.com",
+      "scopes": [ "https://www.googleapis.com/auth/cloud-platform" ]
+   },
+   "options_ui": {
+      "page": "options.html"
+   },
+   "permissions": [ "cookies", "idle", "nativeMessaging", "storage", "alarms", "enterprise.deviceAttributes", "enterprise.platformKeys", "gcm", "identity", "identity.email", "platformKeys", "enterprise.reportingPrivate", "offscreen" ],
+   "sandbox": {
+      "pages": [ "iframe_sandbox.html" ]
+   },
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "1.140.0"
+}

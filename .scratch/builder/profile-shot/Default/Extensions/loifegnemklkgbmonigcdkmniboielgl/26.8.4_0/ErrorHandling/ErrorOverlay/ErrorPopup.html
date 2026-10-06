@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" style="overflow: hidden; height: 100%; margin: 0; padding: 0;">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Citrix Secure Access - Error</title>
+	<link rel="stylesheet" href="ErrorPopup.css">
+	<script src="../../ErrorPopup.js"></script>
+</head>
+
+<body style="overflow: hidden; margin: 0; padding: 0; height: 100%; box-sizing: border-box;">
+	<div class="popup-body">
+		<div class="error-row">
+			<img src="../Resources/icons/error_popup_icon.svg" alt="Error Icon" class="error-icon" />
+			<div>
+				<div class="main-error"></div>
+				<div class="sub-error">
+				</div>
+			</div>
+		</div>
+		<div class="fixes-panel hidden">
+			<strong>Possible fixes:</strong>
+			<ul>
+			</ul>
+		</div>
+		<div class="transaction-row hidden">
+			<span class="transaction-label">Transaction ID:</span>
+			<span class="transaction-id"></span>
+		</div>
+		<div class="action-row">
+			<button class="restart-btn">Retry</button>
+			<!-- <button class="close-btn">Close tab</button> -->
+			<button class="download-logs-btn">Download Logs</button>
+			<button class="sign-in-btn hidden">Sign In</button>
+		</div>
+		<div class="footer-row">
+			<img src="../Resources/icons/citrix_secure_access.svg" alt="Citrix Secure Access" class="powered-by-citrix" />
+		</div>
+	</div>
+</body>
+</html>

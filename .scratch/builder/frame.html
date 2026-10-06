@@ -1,0 +1,11 @@
+<!doctype html>
+<html><body style="margin:0;background:#000;overflow:hidden">
+<script>
+  // Screenshot harness: shows the game in an iframe of exactly w x h (Chrome windows can't be narrower than 500 px).
+  const q = new URLSearchParams(location.search);
+  const f = document.createElement('iframe');
+  f.style.cssText = 'border:0;position:absolute;left:0;top:0;width:' + q.get('w') + 'px;height:' + q.get('h') + 'px';
+  f.src = '../../index.html?' + q.get('q');
+  document.body.appendChild(f);
+</script>
+</body></html>

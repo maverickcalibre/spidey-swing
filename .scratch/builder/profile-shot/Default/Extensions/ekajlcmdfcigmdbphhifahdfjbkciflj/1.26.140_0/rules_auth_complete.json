@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "priority": 1,
+    "action": {
+      "type": "redirect",
+      "redirect": {
+        "extensionPath": "/callout.html#SG/AuthFlowManager"
+      }
+    },
+    "condition": {
+      "urlFilter": "||auth.google.com/redirect",
+      "resourceTypes": ["main_frame"]
+    }
+  },
+  {
+    "id": 2,
+    "priority": 1,
+    "action": {
+      "type": "redirect",
+      "redirect": {
+        "extensionPath": "/callout.html#SG/AuthFlow"
+      }
+    },
+    "condition": {
+      "urlFilter": "||auth.google.com/activate",
+      "resourceTypes": ["main_frame"]
+    }
+  }
+]

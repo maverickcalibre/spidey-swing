@@ -1,0 +1,17 @@
+.cep-masker-masked-hard {
+  cursor: pointer;
+}
+
+.cep-masker-masked-light {
+  display: inline-block;
+  min-width: 6.1em;
+}
+
+.cep-masker-masked-redacted {
+  cursor: default;
+  font-weight: 500;
+}
+
+.cep-masker-payment-bucketing {
+  cursor: default;
+}

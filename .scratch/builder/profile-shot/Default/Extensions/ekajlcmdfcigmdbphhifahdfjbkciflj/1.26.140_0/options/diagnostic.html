@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="/css/material_icons.css">
+  <link rel="stylesheet" href="/css/roboto.css">
+  <link rel="stylesheet" href="/css/material_design_lite.css">
+  <link rel="stylesheet" href="options.css">
+  <script src="/mdl_all_js_compiled.js"></script>
+  <script src="diagnostic_script.js"></script>
+  <meta charset="utf-8">
+  <title>Diagnostics</title>
+</head>
+<body>
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--no-drawer-button">
+    <header class="mdl-layout__header">
+      <div id="header" class="mdl-layout__header-row">
+        <span class="mdl-layout-title">Diagnostics</span>
+      </div>
+    </header>
+    <main class="mdl-layout__content">
+      <div>
+        <h4>User Information</h4>
+        <div class="setting_row">
+          <div class="setting_group">
+            <span class="setting_label">Email:</span>
+          </div>
+          <div class="setting_value">
+            <span id="user-email">Loading...</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h4>Proxy Settings</h4>
+        <div class="setting_row">
+          <div class="setting_group">
+            <span class="setting_label">Mode:</span>
+          </div>
+          <div class="setting_value">
+            <span id="proxy-mode">Loading...</span>
+          </div>
+        </div>
+        <div class="setting_row" style="display: flex; flex-direction: column;">
+          <div class="setting_group">
+            <span class="setting_label" id="proxy-label">Loading...</span>
+          </div>
+          <div class="setting_value">
+            <span id="proxy-rules">Loading...</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h4>Quirks</h4>
+        <div id="quirks-container">Loading...</div>
+      </div>
+
+      <div>
+        <h4>Policy Configuration</h4>
+        <div class="setting_row" style="display: flex; flex-direction: column;">
+          <div class="setting_value">
+            <pre id="policy-config" style="white-space: pre-wrap; word-break: break-all;">Loading...</pre>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h4>Actions</h4>
+        <button id="refresh-routes" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Refresh Routes</button>
+        <button id="reload-extension" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Reload Extension</button>
+        <button id="clear-auth-cache" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Clear Auth Cache</button>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

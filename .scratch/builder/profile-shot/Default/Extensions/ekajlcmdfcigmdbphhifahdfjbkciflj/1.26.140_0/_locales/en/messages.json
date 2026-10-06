@@ -1,0 +1,444 @@
+{
+   "apply_button_label": {
+      "description": "Label for a button that applies rename file operation changes.",
+      "message": "Apply"
+   },
+   "auto_convert_label": {
+      "description": "Label for the auto convert checkbox on the options page.",
+      "message": "Convert saved link to Google editor format"
+   },
+   "cancel_button_label": {
+      "description": "Label for a button that cancels upload operation or folder destination change.",
+      "message": "Cancel"
+   },
+   "clear_log": {
+      "description": "Text for a title of the clear log button.",
+      "message": "Clear"
+   },
+   "close_button_label": {
+      "description": "Label for a button that closes the dialog.",
+      "message": "Close"
+   },
+   "content_menu_audio_label": {
+      "description": "Context menu label for saving an audio to the cloud.",
+      "message": "Save Audio to Cloud"
+   },
+   "content_menu_image_label": {
+      "description": "Context menu label for saving an image to the cloud.",
+      "message": "Save Image to Cloud"
+   },
+   "content_menu_link_label": {
+      "description": "Context menu label for saving the contents of a hyperlink.",
+      "message": "Save Link to Cloud"
+   },
+   "content_menu_video_label": {
+      "description": "Context menu label for saving a video to the cloud.",
+      "message": "Save Video to Cloud"
+   },
+   "data_control_section_title": {
+      "description": "Title for the 'Download Control Settings' section of the options page.",
+      "message": "Download Control Settings"
+   },
+   "data_masking_redacted_text": {
+      "description": "Replaces sensitive data which is caught by the masking tool with this word. ",
+      "message": "REDACTED"
+   },
+   "diagnostic_label": {
+      "description": "Label for the diagnostic level button on the options page.",
+      "message": "Diagnostics:"
+   },
+   "diagnostic_page": {
+      "description": "Text for a button that opens the diagnostics page.",
+      "message": "Open Diagnostics Page"
+   },
+   "download_canceled": {
+      "description": "Report an error when user cancels a download.",
+      "message": "Download canceled."
+   },
+   "download_failure": {
+      "description": "Report an error when the download request fails.",
+      "message": "Failed to save file to cloud storage. $STATUS_TEXT$",
+      "placeholders": {
+         "status_text": {
+            "content": "$1",
+            "example": "404 Not Found."
+         }
+      }
+   },
+   "download_failure_no_data": {
+      "description": "The download process failed due to no data received.",
+      "message": "Failed to save file to cloud storage. No data received."
+   },
+   "download_failure_too_big_mb": {
+      "description": "Report an error when the download request fails due to the file being too large (in megabytes).",
+      "message": "Failed to save file to cloud storage. Source too large ($SIZE$ MB).",
+      "placeholders": {
+         "size": {
+            "content": "$1",
+            "example": "1000"
+         }
+      }
+   },
+   "download_log": {
+      "description": "Text for a button that downloads the extension log file to the user's machine.",
+      "message": "Download log"
+   },
+   "download_request_failed": {
+      "description": "Report an error when the download request fails.",
+      "message": "Download request failed."
+   },
+   "downloading_file_with_name_label": {
+      "description": "Download dialog label for a file that is being downloaded.",
+      "message": "Downloading $FILE_NAME$",
+      "placeholders": {
+         "file_name": {
+            "content": "$1",
+            "example": "file.txt"
+         }
+      }
+   },
+   "downloading_file_without_name_label": {
+      "description": "Download dialog label for a file with unknown name that is being downloaded.",
+      "message": "Downloading…"
+   },
+   "downloading_html_or_text": {
+      "description": "Report an error when the user tries to download a HTML or text file.",
+      "message": "Download failure: HTML or text files are not supported."
+   },
+   "enable_file_url": {
+      "description": "Report an error when user tries to download a file:// URL without having file:// access enabled.",
+      "message": "File URLs must be enabled with \"Allow access to file URLs\" option on Extensions settings page."
+   },
+   "error_create_upload_page": {
+      "description": "Error message when the upload page cannot be initialized.",
+      "message": "Could not create upload page."
+   },
+   "error_display_upload_page": {
+      "description": "Generic error message when creating the upload page fails.",
+      "message": "Failed to create upload page."
+   },
+   "error_display_upload_page_with_msg": {
+      "description": "Error message when creating the upload page fails, including a specific error message.",
+      "message": "Failed to display upload page, error: $ERROR_MSG$",
+      "placeholders": {
+         "error_msg": {
+            "content": "$1",
+            "example": "Network error."
+         }
+      }
+   },
+   "error_download_id_not_found": {
+      "description": "Error message when the download ID is not found in the downloads list.",
+      "message": "Download Item not found."
+   },
+   "error_get_on_click_data": {
+      "description": "Error message when the context menu click (right click menu data) data is not available.",
+      "message": "Could not retrieve download data."
+   },
+   "error_tab_id_invalid": {
+      "description": "Error message when the tab ID of file to be downloaded is invalid.",
+      "message": "Tab ID is not valid."
+   },
+   "error_tab_not_found": {
+      "description": "Error message when the specified tab of the file to be downloaded could not be found.",
+      "message": "Tab not found."
+   },
+   "error_when_saving_link_to_cloud": {
+      "description": "Error message when saving a link to the cloud fails.",
+      "message": "Link can not be saved to the cloud."
+   },
+   "extension_description": {
+      "description": "Description of the extension that displays in the Chrome Web Store and in the Chrome browser.",
+      "message": "Transparently protects your most sensitive data and critical applications."
+   },
+   "folder_picker_button_text": {
+      "description": "Text for the folder picker button on the options page.",
+      "message": "Change destination folder"
+   },
+   "folder_settings_label": {
+      "description": "Label for the folder picker section on the options page.",
+      "message": "Save to Folder"
+   },
+   "get_help_link_text": {
+      "description": "Text shown for troubleshooting help article link.",
+      "message": "Get help."
+   },
+   "google_drive": {
+      "description": "Name of the Google Drive product. The Google Drive product name should be localized.",
+      "message": "Google Drive"
+   },
+   "invalid_url": {
+      "description": "Report an error when user tries to download an invalid URL.",
+      "message": "Invalid URL: $URL$. Downloaded URLs must start with http://, https://, or file://.",
+      "placeholders": {
+         "url": {
+            "content": "$1",
+            "example": "The invalid URL in question."
+         }
+      }
+   },
+   "keep_alive": {
+      "description": "Text for a title of the keep alive checkbox in log page.",
+      "message": "Keep alive"
+   },
+   "log_level_label": {
+      "description": "Label for the Log Level combo box on the options page.",
+      "message": "Log Level:"
+   },
+   "misc_section_label": {
+      "description": "Label for the Misc section on the options page.",
+      "message": "Misc"
+   },
+   "oauth_failure_notification_message": {
+      "description": "Message for the OAuth failure notification.",
+      "message": "You need to sign into your work or school account to save files to Drive."
+   },
+   "oauth_failure_notification_title": {
+      "description": "Title for the OAuth failure notification.",
+      "message": "Authentification failed"
+   },
+   "onedrive": {
+      "description": "Name of the OneDrive product. The OneDrive product name should be localized.",
+      "message": "OneDrive"
+   },
+   "onedrive_auth_error_access_denied": {
+      "description": "Error message when user denies consent (access_denied).",
+      "message": "Consent denied. You must grant permission to save files to OneDrive."
+   },
+   "onedrive_auth_error_generic": {
+      "description": "Generic OneDrive auth error message.",
+      "message": "A Microsoft authentication error occurred."
+   },
+   "onedrive_auth_error_interaction_required": {
+      "description": "Error message when MSFT says interaction is required (interaction_required, login_required).",
+      "message": "OneDrive session expired. Please sign in again."
+   },
+   "onedrive_auth_error_invalid_grant": {
+      "description": "Error message when authorization code or grant is invalid.",
+      "message": "Authentication failed. Please try again."
+   },
+   "onedrive_auth_error_temporarily_unavailable": {
+      "description": "Error message when MSFT returns temporarily_unavailable or server_error.",
+      "message": "Microsoft services are temporarily unavailable. Please try again later."
+   },
+   "onedrive_error_access_denied": {
+      "description": "Error message when MSFT returns accessDenied.",
+      "message": "You don't have permission to perform this action."
+   },
+   "onedrive_error_activity_limit_reached": {
+      "description": "Error message when MSFT returns activityLimitReached.",
+      "message": "Too many requests. Please try again later."
+   },
+   "onedrive_error_general_exception": {
+      "description": "Error message when MSFT returns generalException.",
+      "message": "An unspecified error occurred with OneDrive."
+   },
+   "onedrive_error_invalid_range": {
+      "description": "Error message when MSFT returns invalidRange.",
+      "message": "The specified upload range is invalid or unavailable."
+   },
+   "onedrive_error_invalid_request": {
+      "description": "Error message when MSFT returns invalidRequest.",
+      "message": "The request is malformed or incorrect."
+   },
+   "onedrive_error_item_not_found": {
+      "description": "Error message when MSFT returns itemNotFound.",
+      "message": "The file or folder could not be found."
+   },
+   "onedrive_error_malware_detected": {
+      "description": "Error message when MSFT returns malwareDetected.",
+      "message": "Malware was detected in the file."
+   },
+   "onedrive_error_name_already_exists": {
+      "description": "Error message when MSFT returns nameAlreadyExists.",
+      "message": "A file with this name already exists."
+   },
+   "onedrive_error_not_allowed": {
+      "description": "Error message when MSFT returns notAllowed.",
+      "message": "This action is not allowed by OneDrive."
+   },
+   "onedrive_error_not_supported": {
+      "description": "Error message when MSFT returns notSupported.",
+      "message": "This request is not supported by OneDrive."
+   },
+   "onedrive_error_quota_limit_reached": {
+      "description": "Error message when MSFT returns quotaLimitReached.",
+      "message": "You have reached your OneDrive quota limit."
+   },
+   "onedrive_error_rename_failed": {
+      "description": "Fallback error message when renaming a file in OneDrive fails with an unknown error.",
+      "message": "Failed to rename file in OneDrive."
+   },
+   "onedrive_error_resource_modified": {
+      "description": "Error message when MSFT returns resourceModified.",
+      "message": "The file has changed since it was last read."
+   },
+   "onedrive_error_resync_required": {
+      "description": "Error message when MSFT returns resyncRequired.",
+      "message": "The app must reset the sync state. Please try again."
+   },
+   "onedrive_error_service_not_available": {
+      "description": "Error message when MSFT returns serviceNotAvailable.",
+      "message": "OneDrive service is not available. Please try again later."
+   },
+   "onedrive_error_trash_failed": {
+      "description": "Fallback error message when trashing a file in OneDrive fails with an unknown error.",
+      "message": "Failed to move file to trash in OneDrive."
+   },
+   "onedrive_error_unauthenticated": {
+      "description": "Error message when MSFT returns unauthenticated.",
+      "message": "You are not authenticated with OneDrive."
+   },
+   "onedrive_error_unknown_upload_failure": {
+      "description": "Fallback error message when a OneDrive upload fails with an unknown error.",
+      "message": "An unknown error occurred during upload."
+   },
+   "onedrive_upload_canceled": {
+      "description": "Error message when the OneDrive upload is canceled.",
+      "message": "Upload canceled by user."
+   },
+   "open_saved_file_label": {
+      "description": "Label for the open saved file checkbox on the options page.",
+      "message": "Automatically open the saved file"
+   },
+   "options_page_title": {
+      "description": "Title of the options page.",
+      "message": "Secure Enterprise Browser Options"
+   },
+   "percent_done": {
+      "description": "The progress percentage when uploading a file.",
+      "message": "$PERCENT$% done",
+      "placeholders": {
+         "percent": {
+            "content": "$1",
+            "example": "100"
+         }
+      }
+   },
+   "real_time_log": {
+      "description": "Text for a title of the real time log view.",
+      "message": "Real time log"
+   },
+   "rename_button_label": {
+      "description": "Label for a button that renames the file.",
+      "message": "Rename"
+   },
+   "rename_text_label": {
+      "description": "Label for a text field that allows the user to rename a file.",
+      "message": "Rename:"
+   },
+   "saved_file_description": {
+      "description": "Sentence that informs that a file that has been saved to the cloud. Starts and ends with file name and destination folder name.",
+      "message": " was saved to "
+   },
+   "show_log": {
+      "description": "Text for a button that opens the extension log window.",
+      "message": "Show log"
+   },
+   "title": {
+      "description": "The name of the extension.",
+      "message": "Secure Enterprise Browser"
+   },
+   "trash_button_label": {
+      "description": "Label for a button that trashes the uploaded file.",
+      "message": "Trash"
+   },
+   "trashed_file_description": {
+      "description": "Sentence that informs that a file that has been trashed in cloud. Starts and ends with file name and cloud home folder name.",
+      "message": " was moved to trash. Go to "
+   },
+   "troubleshooting_section_title": {
+      "description": "Title for the 'troubleshooting' section of the options page.",
+      "message": "Troubleshooting"
+   },
+   "unspecified_error": {
+      "description": "Report an error when the download request fails and no status value is available.",
+      "message": "Unspecified error."
+   },
+   "untilted_audio_default_filename": {
+      "description": "Default filename for an audio file.",
+      "message": "Untitled audio"
+   },
+   "untilted_default_filename": {
+      "description": "Default filename for a file.",
+      "message": "Untitled"
+   },
+   "untilted_image_default_filename": {
+      "description": "Default filename for an image file.",
+      "message": "Untitled image"
+   },
+   "untilted_video_default_filename": {
+      "description": "Default filename for an video file.",
+      "message": "Untitled video"
+   },
+   "upload_canceled": {
+      "description": "The user canceled the upload. No punctuation needed because this is displayed inside parenthesis as a status text.",
+      "message": "Upload canceled"
+   },
+   "upload_dialog_title": {
+      "description": "Title for the save to cloud storage dialog.",
+      "message": "Save to $APPLICATION_NAME$",
+      "placeholders": {
+         "application_name": {
+            "content": "$1",
+            "example": "Google Drive"
+         }
+      }
+   },
+   "upload_failure": {
+      "description": "The upload process failed.",
+      "message": "Upload failure: $ERROR_MSG$",
+      "placeholders": {
+         "error_msg": {
+            "content": "$1",
+            "example": "An example error message."
+         }
+      }
+   },
+   "uploading": {
+      "description": "The progress message when uploading a file.",
+      "message": "Saving $FILE_NAME$ to $APPLICATION_NAME$ …",
+      "placeholders": {
+         "application_name": {
+            "content": "$2",
+            "example": "Google Drive"
+         },
+         "file_name": {
+            "content": "$1",
+            "example": "file.txt"
+         }
+      }
+   },
+   "user_validation_failure_context_info_failed": {
+      "description": "Message for the user validation failure notification when context info fails to load.",
+      "message": "Failed to retrieve browser context. Please sign in again."
+   },
+   "user_validation_failure_domain_mismatch": {
+      "description": "Message for the user validation failure notification when domains mismatch.",
+      "message": "The profile domain does not match the device domain."
+   },
+   "user_validation_failure_empty_email": {
+      "description": "Message for the user validation failure notification when the email is empty.",
+      "message": "Failed to retrieve user email. Please sign into a valid profile."
+   },
+   "user_validation_failure_notification_message": {
+      "description": "Message for the user validation failure notification.",
+      "message": "Please sign into a valid work or school account."
+   },
+   "user_validation_failure_notification_title": {
+      "description": "Title for the user validation failure notification.",
+      "message": "User validation failed!"
+   },
+   "user_validation_failure_onedrive_email_mismatch": {
+      "description": "Message for the user validation failure notification when emails mismatch for OneDrive.",
+      "message": "The Chrome profile email does not match the OneDrive account email."
+   },
+   "user_validation_failure_unmanaged_profile": {
+      "description": "Message for the user validation failure notification when the profile is unmanaged.",
+      "message": "This profile is not managed. Please sign into a valid work or school account."
+   },
+   "userid_email_label": {
+      "description": "Label for the User Email text on the options page.",
+      "message": "Account"
+   }
+}

@@ -1,0 +1,19 @@
+html, body{
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.mdl-layout-icon {
+  margin: 0 10px;
+
+  .mdl-checkbox.is-checked .mdl-checkbox__tick-outline {
+    background-color: #fff;
+  }
+}
+
+#log-buffer {
+  max-height: 88vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  margin-top: 5px;
+}

@@ -1,0 +1,6 @@
+Release Version: 1.9.16
+Build Version: 1.9.16.331
+Build Time: 2026-08-26 07:47:43Z
+Branch: release
+Commit SHA:
+web/extension: ba3f09fb39dfa9fa085317df9136d7733fb59b7e

@@ -1,0 +1,146 @@
+{
+   "add_account_button_text": {
+      "description": "Text for the Add Account button. Directs the user to a page where they can sign into a google account",
+      "message": "Add account"
+   },
+   "admin_install_required_text": {
+      "description": "Text shown for ADMIN_INSTALL_REQUIRED. On ChromeOS devices only, the extension must be force installed on the device by the Google Workspace administrator who manages the device. See https://support.google.com/chrome/a/answer/6306504 for more context",
+      "message": "This extension must be force installed by the enterprise admin on ChromeOS."
+   },
+   "clear_log": {
+      "description": "Text for a title of the clear log button",
+      "message": "Clear"
+   },
+   "consent_more_details": {
+      "description": "Continuation of the 'consent_text' message. 'Details' means more information regarding the Google Privacy Policy",
+      "message": "For more details, click"
+   },
+   "consent_more_details_link": {
+      "description": "Continuation of the 'consent_more_details' message. It is separate because this text will be turned into a clickable link to a separate information page.",
+      "message": "here."
+   },
+   "consent_text": {
+      "description": "The consent message shown to the user.",
+      "message": "Your enterprise administrator is protecting this device with"
+   },
+   "data_integrity_error_text": {
+      "description": "Text shown for DATA_INTEGRITY_ERROR.",
+      "message": "Can't sync because of a data integrity error. Reenrolling the device through a manual sync might resolve the issue."
+   },
+   "data_protection_key_error_text": {
+      "description": "Text shown for DATA_PROTECTION_KEY_ERROR.",
+      "message": "Failed to recover data protection key."
+   },
+   "disabled_accounts": {
+      "description": "Text shown for the list of disabled accounts. Refers to accounts which the user is signed into but have not been enabled by the domain administrator",
+      "message": "These accounts are not enabled for"
+   },
+   "download_log": {
+      "description": "Text for a button that downloads the extension log file to the user's machine",
+      "message": "Download log"
+   },
+   "dpapi_failure_error_text": {
+      "description": "Text shown for DPAPI related errors on Windows only.",
+      "message": "Can't sync because of a Data Protection API error."
+   },
+   "explanation": {
+      "description": "Explanation of the extension. The extension collects device information such as OS information (the operating system, os version number), identifiers (serial number, mac address), and the user using the device. This information is collected and may be viewed in the Google Workspace Admin console by a Google Workspace administrator",
+      "message": "allows Google Workspace administrators to view laptop and desktop status, including OS, device, and user information."
+   },
+   "extension_description": {
+      "description": "Description of the extension that displays in the Chrome Web Store. Essentially the same as 'explanation_internal' message",
+      "message": "Allows Google Workspace administrators to view laptop and desktop status, including OS, device, and user information."
+   },
+   "force_sync": {
+      "description": "Text for a button that forces a sync",
+      "message": "Force Sync"
+   },
+   "get_help_link_text": {
+      "description": "Text shown for troubleshooting help article link.",
+      "message": "Get help."
+   },
+   "keychain_auth_error_text": {
+      "description": "Text shown for Keychain authorization errors on MacOS only.",
+      "message": "Can't sync because of a Keychain authorization error."
+   },
+   "keychain_locked_error_text": {
+      "description": "Text shown for Keychain locked errors on MacOS only.",
+      "message": "Can't sync because the keychain is locked."
+   },
+   "last_sync_date": {
+      "description": "Text shown in popup when all accounts have synced at least once. Will be displayed along with a date: i.e. 'Last sync: 07/24/2018 12:00:00'",
+      "message": "Last sync"
+   },
+   "log_level_label": {
+      "description": "Label for the Log Level combo box on the options page",
+      "message": "Log Level:"
+   },
+   "native_messaging_download_text": {
+      "description": "Text shown as a Native Helper download link.",
+      "message": "download"
+   },
+   "native_messaging_error_text_1": {
+      "description": "First part of the text shown for NATIVE_MESSAGING_UNAVAILABLE. 'Native Helper' here and in other messages refers to a native binary that must be installed along with the extension in order for the extension to function properly.",
+      "message": "Required components are missing on this machine. Please"
+   },
+   "native_messaging_error_text_1_chrome": {
+      "description": "First part of the text shown for NATIVE_MESSAGING_UNAVAILABLE. 'Native Helper' here and in other messages refers to a native binary that must be installed along with the extension in order for the extension to function properly.",
+      "message": "Required components are missing on this machine. Please either update Chrome to the latest version or"
+   },
+   "native_messaging_error_text_2": {
+      "description": "Second part of the text shown for NATIVE_MESSAGING_UNAVAILABLE. 'Native Helper' here and in other messages refers to a native binary that must be installed along with the extension in order for the extension to function properly.",
+      "message": " and install the Native Helper package."
+   },
+   "network_failure_text": {
+      "description": "Text shown for NETWORK_FAILURE. 'Sync' here means sending device information to our server. The message means that we were unable to send the information due to device being offline",
+      "message": "Last sync failed due to no network connection."
+   },
+   "no_sync_date": {
+      "description": "Text shown in popup when some account has not been synced before",
+      "message": "No known sync date."
+   },
+   "options_page_title_external": {
+      "description": "Title of the external version of the options page",
+      "message": "Endpoint Verification Options"
+   },
+   "options_page_title_internal": {
+      "description": "Title of the internal version of the options page",
+      "message": "SecureConnect Reporting Options"
+   },
+   "platform_keys_inaccessible_text": {
+      "description": "Text shown for PLATFORM_KEYS_INACCESSIBLE. 'Client certificates' and 'keys' here refer cryptographic keys and certificates used to establish secure internet connections. On ChromeOS devices, the extension requires a specific setting to be enabled in order to be able to use these",
+      "message": "The extension needs access to client certificates and keys on ChromeOS."
+   },
+   "real_time_log": {
+      "description": "Text for a title of the real time log view",
+      "message": "Real time log"
+   },
+   "show_log": {
+      "description": "Text for a button that opens the extension log window",
+      "message": "Show log"
+   },
+   "signin_prompt": {
+      "description": "Text shown when no accounts are logged in. Users must be signed in with a google account on a domain that has SecureConnect enabled (typically a work or school account)",
+      "message": "requires you to be logged into your work or school account."
+   },
+   "sync_button_text": {
+      "description": "Text on the sync button. 'Sync', both here and in other messages, refers to sending device information to our server",
+      "message": "Sync Now"
+   },
+   "sync_error_text": {
+      "description": "Text shown for GENERIC_FAILURE. 'Sync' here means sending device information to our server. The message means that we were unable to send the information and will attempt to try again shortly",
+      "message": "Failed to sync. A sync will be retried shortly."
+   },
+   "title_external": {
+      "description": "The external name of the extension",
+      "message": "Endpoint Verification"
+   },
+   "title_internal": {
+      "description": "The internal (googlers-only) name of the extension",
+      "message": "SecureConnect Reporting"
+   },
+   "troubleshooting_section_title": {
+      "description": "Title for the 'troubleshooting' section of the options page",
+      "message": "Troubleshooting"
+   }
+}

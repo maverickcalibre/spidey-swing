@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="../css/material_icons/material_icons.css">
+  <link rel="stylesheet" href="../css/roboto/roboto.css">
+  <link rel="stylesheet" href="material_design_lite.css">
+  <link rel="stylesheet" href="popup.css">
+  <script src="mdl_all_js_compiled.js"></script>
+  <script src="popup_script.js"></script>
+  <title data-i18n="title"></title>
+  <meta charset="utf-8">
+</head>
+<body>
+  <div id="templates" class="hidden">
+    <div data-template-id="account" class="account">
+      <span class="avatar-container" data-part="avatar">
+        <img class="mdl-list__item-avatar avatar" data-part="picture" alt="Profile picture">
+      </span>
+      <span class="account-content">
+        <span class="account-info">
+          <span class="display-name" data-part="display-name"></span>
+          <span class="email" data-part="email"></span>
+        </span>
+      </span>
+    </div>
+    <div data-template-id="account-tooltip" class="account-tooltip">
+      <span class="email" data-part="email"></span>
+    </div>
+    <div data-template-id="sync-banner" class="sync banner stack" data-active-item="error">
+      <div class="error horizontal-list">
+        <i class="banner-icon material-icons mdl-color-text--red-700">warning</i>
+        <span data-part="error-content"></span>
+      </div>
+    </div>
+    <span data-template-id="error-content" data-variation="text_and_help_link">
+      <span data-part="text"></span>
+      <a data-part="help-link" data-i18n="get_help_link_text" href="#" target="_blank"></a>
+    </span>
+    <span data-template-id="error-content" data-variation="native-messaging:generic">
+      <span data-i18n="native_messaging_error_text_1"></span>
+      <a data-part="download-link" data-i18n="native_messaging_download_text" href="#" target="_blank"></a>
+      <span data-i18n="native_messaging_error_text_2"></span>
+    </span>
+    <span data-template-id="error-content" data-variation="native-messaging:chrome">
+      <span data-i18n="native_messaging_error_text_1_chrome"></span>
+      <a data-part="download-link" data-i18n="native_messaging_download_text" href="#" target="_blank"></a>
+      <span data-i18n="native_messaging_error_text_2"></span>
+    </span>
+  </div>
+  <div id="popup-content">
+    <header id="header" class="horizontal-list">
+      <span id="title" data-i18n="title" class="mdl-layout-title"></span>
+      <span data-requires-sku="internal">
+        <img id="logo" alt="Google Logo" src="googlelogo/2x/googlelogo_color_84x28dp.png">
+      </span>
+    </header>
+    <main id="main">
+      <div id="banners">
+      </div>
+      <div id="view-area">
+        <div id="signin-view" class="spaced vertical-list hidden">
+          <div>
+            <span data-i18n="title"></span>
+            <span data-i18n="explanation"></span>
+          </div>
+          <div class="spaced horizontal-list">
+            <i class="material-icons mdl-color-text--orange-900 no-accounts">no_accounts</i>
+            <div class="spaced vertical-list">
+              <div>
+                <span data-i18n="title"></span>
+                <span data-i18n="signin_prompt"></span>
+              </div>
+              <div class="spaced horizontal-list">
+                <button data-part="add-account" data-i18n="add_account_button_text" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"></button>
+                <i id="disabled-accounts-icon" data-part="disabled-accounts" class="material-icons mdl-color-text--orange-600 !hidden">warning</i>
+                <div class="mdl-tooltip mdl-tooltip--top" data-mdl-for="disabled-accounts-icon">
+                  <span data-i18n="disabled_accounts"></span>
+                  <span data-i18n="title"></span><span>:</span>
+                  <div data-part="account-list">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="sync-view" class="spaced vertical-list">
+          <div id="accounts">
+            <div data-part="load-indicator"><span class="mdl-spinner mdl-js-spinner mdl-spinner--single-color is-active"></span></div>
+            <div data-part="account-list" class="spaced vertical-list hidden"></div>
+            </div>
+          <div id="consent">
+            <span data-i18n="consent_text"></span>
+            <span data-i18n="title"></span><span>.</span>
+            <span data-i18n="consent_more_details"></span>
+            <a data-i18n="consent_more_details_link" href="https://support.google.com/a/users/answer/9018161" target="_blank"></a>
+          </div>
+          <div id="sync-status" class="horizontal-list">
+            <span data-part="content"></span>
+            <button id="sync-button" class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">
+              <span class="stack">
+                <span data-i18n="sync_button_text" data-part="enabled"></span>
+                <span id="sync-spinner" class="mdl-spinner mdl-js-spinner mdl-spinner--single-color" data-part="disabled"></span>
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

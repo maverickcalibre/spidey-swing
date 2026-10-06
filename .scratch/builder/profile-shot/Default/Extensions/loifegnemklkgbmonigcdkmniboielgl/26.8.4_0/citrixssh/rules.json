@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "priority": 1,
+    "action": {
+      "type": "redirect",
+      "redirect": {
+        "regexSubstitution": "\\1"
+      }
+    },
+    "condition": {
+      "regexFilter": "^https://ssh\\.netscalergatewaystaging\\.net/(citrixssh/.*)$",
+      "resourceTypes": [
+        "stylesheet",
+        "script",
+        "image",
+        "font",
+        "xmlhttprequest",
+        "media",
+        "websocket",
+        "webtransport",
+        "webbundle",
+        "other"
+      ]
+    }
+  }
+]

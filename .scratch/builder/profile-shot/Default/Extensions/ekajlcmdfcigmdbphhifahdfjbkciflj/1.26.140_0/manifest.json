@@ -1,0 +1,67 @@
+{
+   "action": {
+      "default_icon": {
+         "128": "images/icon-128-normal.png",
+         "16": "images/icon-16-normal.png",
+         "256": "images/icon-256-normal.png",
+         "32": "images/icon-32-normal.png",
+         "48": "images/icon-48-normal.png",
+         "512": "images/icon-512-normal.png"
+      },
+      "default_popup": "popup/popup.html"
+   },
+   "author": "seb-extension-publisher@google.com",
+   "background": {
+      "service_worker": "background_script.js"
+   },
+   "content_security_policy": {
+      "extension_pages": "script-src 'self'; object-src 'self'",
+      "sandbox": "sandbox allow-scripts allow-downloads allow-forms allow-popups allow-modals; script-src 'self' 'unsafe-inline' 'unsafe-eval'; child-src 'self'"
+   },
+   "declarative_net_request": {
+      "rule_resources": [ {
+         "enabled": true,
+         "id": "rules_auth_complete",
+         "path": "rules_auth_complete.json"
+      } ]
+   },
+   "default_locale": "en",
+   "description": "__MSG_extension_description__",
+   "externally_connectable": {
+      "ids": [ "pginchggjkofdcmipogfgpbcfgifhhpd", "loifegnemklkgbmonigcdkmniboielgl" ]
+   },
+   "host_permissions": [ "https://*/*" ],
+   "icons": {
+      "128": "images/icon-128-normal.png",
+      "16": "images/icon-16-normal.png",
+      "256": "images/icon-256-normal.png",
+      "32": "images/icon-32-normal.png",
+      "48": "images/icon-48-normal.png",
+      "512": "images/icon-512-normal.png"
+   },
+   "incognito": "not_allowed",
+   "key": "MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA3WZjvlwgbyD2Y5tSOgRyaFnjHrlmB0QikGCh0nI57Sh6DvMgC1Bxt+pHmlQ8T/Y217CGmfh3h6147HY7Qi7ii43/UzgQaWVaMhg3KoykN5+RacwIXUW3etlw5h5vjU7mtKfbz4Z7Ycfli4mfomcJmYY7WlYbGApIJQngOJLdvu5fZbYZCxvugkSIMZdBz3GtX4zmLCTTuiaorpVAwJ38Aa/mta9aySC2O2iA4AsoVvHn8IuDcXfbztkUaOkxnNyWIZ8OOgFFnXRW8kU1DukW8XIEA6B21JeNZjjtgS6ATRdqQlfaEnn9bWrANGyyM0H5gsnWPhw4mRCuzyLwoseS9etR/+SFDTiEFJnUQp6OzPw6P6YcMODMwozqk1db3YshH+1+JrkeyImD5B6Rh9fUsZMW5puVwL1mHgkhrGMttKjJd0KZY8wR3WsUV5bJQPGsLg/xpQsQzajOSGM3qpPfvwDsnFITiUaR68jDKrCodzGjMS9oWV7beCfTB5S7f/pMEVqKdztkU6XaQCOghTsfbBHoMEAApyvcJQJYyLIDd3gJN5Qcwc0hqZpxwHf788n4llMwkCIVGKgaUivjZjyAHX1M7ryJ3mnz21v6bB0baOvhR5j/hIRqG5f/KW1KV8vnQlU7j7K0wMCyEGj06bQOL1wEB4Ky7JXCuWWsZj5PVocCAwEAAQ==",
+   "manifest_version": 3,
+   "minimum_chrome_version": "110",
+   "name": "Secure Enterprise Browser",
+   "oauth2": {
+      "client_id": "231751498530-njeslv82ur9rp4rk1t52gl7qpnq5jgg9.apps.googleusercontent.com",
+      "scopes": [ "https://www.googleapis.com/auth/cloud-secure-gateway-users.access", "https://www.googleapis.com/auth/drive.file", "https://www.googleapis.com/auth/userinfo.email" ]
+   },
+   "options_ui": {
+      "page": "options/options.html"
+   },
+   "permissions": [ "alarms", "browsingData", "contextMenus", "declarativeNetRequestWithHostAccess", "downloads", "enterprise.reportingPrivate", "identity", "identity.email", "idle", "nativeMessaging", "notifications", "proxy", "proxyOverrideRulesPrivate", "scripting", "storage", "tabs", "webNavigation", "webRequest", "webRequestAuthProvider" ],
+   "sandbox": {
+      "pages": [ "iframe_sandbox.html" ]
+   },
+   "storage": {
+      "managed_schema": "managed_schema.json"
+   },
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "1.26.140",
+   "web_accessible_resources": [ {
+      "matches": [ "\u003Call_urls>" ],
+      "resources": [ "/callout.html" ]
+   } ]
+}

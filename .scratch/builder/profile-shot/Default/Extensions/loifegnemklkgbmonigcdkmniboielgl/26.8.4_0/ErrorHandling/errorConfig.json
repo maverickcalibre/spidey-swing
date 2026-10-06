@@ -1,0 +1,106 @@
+{
+	"errors": {
+		"POLICY_RETRIEVE_FAILED": {
+			"id": "POLICY_RETRIEVE_FAILED",
+			"titleKey": "error.POLICY_RETRIEVE_FAILED.title",
+			"messageKey": "error.common.shareErrorCode",
+			"icon": "Resources/icons/errorIcon.svg",
+			"actionable": true,
+			"retryable": true
+		},
+		"POLICY_ENFORCE_FAILED": {
+			"id": "POLICY_ENFORCE_FAILED",
+			"titleKey": "error.common.failedToEnforcePolicy",
+			"messageKey": "error.common.shareErrorCode",
+			"icon": "Resources/icons/errorIcon.svg",
+			"actionable": true,
+			"retryable": true
+		},
+		"EPA_NOT_INSTALLED": {
+			"id": "EPA_NOT_INSTALLED",
+			"titleKey": "error.common.failedToEnforcePolicy",
+			"messageKey": "error.EPA_NOT_INSTALLED.message",
+			"icon": "Resources/icons/errorIcon.svg",
+			"actionable": true,
+			"retryable": true
+		},
+		"WORKSPACE_APP_ERROR": {
+			"id": "WORKSPACE_APP_ERROR",
+			"titleKey": "error.common.failedToEnforcePolicy",
+			"messageKey": "error.WORKSPACE_APP_ERROR.message",
+			"icon": "Resources/icons/errorIcon.svg",
+			"actionable": true,
+			"retryable": true
+		},
+		"SESSION_RECORDING_AGENT_NOT_INSTALLED": {
+			"id": "SESSION_RECORDING_AGENT_NOT_INSTALLED",
+			"titleKey": "error.SESSION_RECORDING_AGENT_NOT_INSTALLED.title",
+			"messageKey": "error.SESSION_RECORDING_AGENT_NOT_INSTALLED.message",
+			"icon": "Resources/icons/errorIcon.svg",
+			"actionable": true,
+			"retryable": true
+		},
+		"SESSION_RECORDING_AGENT_VERSION_UNSUPPORTED": {
+			"id": "SESSION_RECORDING_AGENT_VERSION_UNSUPPORTED",
+			"titleKey": "error.SESSION_RECORDING_AGENT_VERSION_UNSUPPORTED.title",
+			"messageKey": "error.SESSION_RECORDING_AGENT_VERSION_UNSUPPORTED.message",
+			"icon": "Resources/icons/errorIcon.svg",
+			"actionable": true,
+			"retryable": true
+		},
+		"SESSION_RECORDING_NO_RESPONSE": {
+			"id": "SESSION_RECORDING_NO_RESPONSE",
+			"titleKey": "error.SESSION_RECORDING_NO_RESPONSE.title",
+			"messageKey": "error.common.shareErrorCode",
+			"icon": "Resources/icons/errorIcon.svg",
+			"actionable": true,
+			"retryable": true
+		},
+		"SESSION_RECORDING_STOPPED": {
+			"id": "SESSION_RECORDING_STOPPED",
+			"titleKey": "error.SESSION_RECORDING_STOPPED.title",
+			"messageKey": "error.SESSION_RECORDING_STOPPED.message",
+			"icon": "Resources/icons/errorIcon.svg",
+			"actionable": true,
+			"retryable": true,
+			"possibleFixes": [
+				"Contact your system administrator."
+			]
+		},
+		"UNKNOWN_ERROR": {
+			"id": "UNKNOWN_ERROR",
+			"titleKey": "error.UNKNOWN_ERROR.title",
+			"messageKey": "error.UNKNOWN_ERROR.message",
+			"icon": "Resources/icons/errorIcon.svg",
+			"actionable": false,
+			"retryable": false
+		},
+		"BLOCK_URL_ERROR": {
+			"id": "BLOCK_URL_ERROR",
+			"titleKey": "error.BLOCK_URL_ERROR.title",
+			"messageKey": "error.BLOCK_URL_ERROR.message",
+			"icon": "Resources/icons/errorIcon.svg",
+			"actionable": false,
+			"retryable": false
+		},
+		"FORCE_LOGOUT": {
+			"id": "FORCE_LOGOUT",
+			"titleKey": "error.FORCE_LOGOUT.title",
+			"messageKey": "error.FORCE_LOGOUT.message",
+			"icon": "Resources/icons/errorIcon.svg",
+			"actionable": false,
+			"retryable": false,
+			"signInButton": true
+		},
+		"FORCE_LOGOUT_WARNING": {
+			"id": "FORCE_LOGOUT_WARNING",
+			"titleKey": "error.FORCE_LOGOUT_WARNING.title",
+			"messageKey": "error.FORCE_LOGOUT_WARNING.message",
+			"icon": "Resources/icons/errorIcon.svg",
+			"actionable": false,
+			"retryable": false,
+			"signInButton": true
+		}
+	},
+	"defaultError": "UNKNOWN_ERROR"
+}

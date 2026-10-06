@@ -1,0 +1,249 @@
+{
+  "type": "object",
+  "properties": {
+    "accessControl": {
+      "type": "object",
+      "properties": {
+        "navigation": {
+          "type": "object",
+          "properties": {
+            "rules": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "fqdns": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "action": {
+                    "type": "object",
+                    "properties": {
+                      "kind": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "securityGateway": {
+      "type": "object",
+      "properties": {
+        "authentication": {
+          "type": "object"
+        },
+        "externalHelper": {
+          "type": "object",
+          "properties": {
+            "id": { "type": "string" },
+            "metadata": {
+              "type": "object",
+              "properties": {
+                "action": { "type": "string" },
+                "input": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "key": { "type": "string" },
+                      "stringValue": { "type": "string" },
+                      "stringArrayValue": {
+                        "type": "array",
+                        "items": { "type": "string" }
+                      },
+                      "numericValue": { "type": "number" },
+                      "flagValue": { "type": "boolean" }
+                    }
+                  }
+                },
+                "timeout": { "type": "number" }
+              }
+            }
+          }
+        },
+        "context": {
+          "type": "object",
+          "properties": {
+            "resource": {
+              "type": "string"
+            },
+            "metadata": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "key": {
+                    "type": "string"
+                  },
+                  "value": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "serviceDiscovery": {
+          "type": "object",
+          "properties": {
+            "apiBaseUrl": {
+              "type": "string"
+            },
+            "routes": {
+              "type": "object",
+              "properties": {
+                "expiry": {
+                  "type": "number"
+                },
+                "externalMetadata": {
+                  "type": "object",
+                  "properties": {
+                    "action": { "type": "string" },
+                    "input": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "key": { "type": "string" },
+                          "stringValue": { "type": "string" },
+                          "stringArrayValue": {
+                            "type": "array",
+                            "items": { "type": "string" }
+                          },
+                          "numericValue": { "type": "number" },
+                          "flagValue": { "type": "boolean" }
+                        }
+                      }
+                    },
+                    "timeout": { "type": "number" }
+                  }
+                },
+                "flags": {
+                  "type": "array",
+                  "items": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "externalHosts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "allowedSenders": {
+                "type": "array",
+                "items": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "dataMasking": {
+      "type": "object",
+      "properties": {
+        "rules": {
+          "description": "Each rule contains a list of detectors to be applied to the url given for that rule.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "maskType": {
+                "description": "Optional default mask type for detectors. May be set to LIGHT_OBFUSCATION, HARD_OBFUSCATION, or REDACT. ",
+                "type": "string"
+              },
+              "disableCopy": {
+                "description": "Optional field to disable copy on the page.",
+                "type": "boolean"
+              },
+              "urls": {
+                "description": "Glob format urls to apply the detectors to.",
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "detectors": {
+                "type": "array",
+                "items": {
+                  "title": "Detector",
+                  "description": "Regex with identifiers plus type of masking to be applied.",
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "description": "Required name of the detector. If a reserved name is used then the regex property should not be set.",
+                      "type": "string"
+                    },
+                    "maskType": {
+                      "description": "Optional if maskType is set in parent rule object. May be set to LIGHT_OBFUSCATION, HARD_OBFUSCATION, or REDACT.",
+                      "type": "string"
+                    },
+                    "removeLink": {
+                      "description": "Optional field to remove links from the masked text.",
+                      "type": "boolean"
+                    },
+                    "regex": {
+                      "type": "object",
+                      "description": "Regex that specifies the text that the detector should mask.",
+                      "properties": {
+                        "pattern": {
+                          "description": "Pattern used to match the text to mask.",
+                          "type": "string"
+                        },
+                        "flags": {
+                          "description": "Optional field for setting the flags of the match.",
+                          "type": "object",
+                          "properties": {
+                            "ignoreCase": {
+                              "description": "Optional field for setting the ignoreCase flag. Corresponds to the 'i' flag.",
+                              "type": "boolean"
+                            },
+                            "multiline": {
+                              "description": "Optional field for setting the multiLine flag. Corresponds to the 'm' flag.",
+                              "type": "boolean"
+                            },
+                            "dotAll": {
+                              "description": "Optional field for setting the single line (dot all) flag. Corresponds to the 's' flag.",
+                              "type": "boolean"
+                            },
+                            "unicode": {
+                              "description": "Optional field for setting the unicode flag. Corresponds to the 'u' flag.",
+                              "type": "boolean"
+                            }
+                          }
+                        },
+                        "matchGroup": {
+                          "description": "Optional field for when only the specified capture group should be masked.",
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "downloadControl": {
+      "type": "object",
+      "properties": {
+        "enableDownloadToDriveContextMenu": {
+          "description": "Default value false. Optional field to make download to drive context menu visible to users when they right click on a link, image, file, etc.",
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}

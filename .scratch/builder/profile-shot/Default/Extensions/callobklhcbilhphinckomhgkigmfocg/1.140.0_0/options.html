@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="../css/material_icons/material_icons.css">
+  <link rel="stylesheet" href="../css/roboto/roboto.css">
+  <link rel="stylesheet" href="material_design_lite.css">
+  <link rel="stylesheet" href="options.css">
+  <script src="mdl_all_js_compiled.js"></script>
+  <script src="options_script.js"></script>
+  <meta charset="utf-8">
+  <title data-i18n="options_page_title">(Loading)</title>
+</head>
+<body>
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--no-drawer-button">
+    <header class="mdl-layout__header">
+      <div id="header" class="mdl-layout__header-row">
+        <span id="options-title" data-i18n="troubleshooting_section_title" class="mdl-layout-title">(Loading)</span>
+      </div>
+    </header>
+    <main class="mdl-layout__content">
+      <div>
+        <span class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <label data-i18n="log_level_label" class="mdl-textfield__label" for="log-level"></label>
+          <select class="mdl-textfield__input" id="log-level" name="log-level">
+            <option value="1000">Error</option>
+            <option value="900">Warning</option>
+            <option value="800">Info</option>
+            <option value="600">Debug</option>
+            <option value="100">Trace</option>
+            <option value="0">All</option>
+          </select>
+        </span>
+        <button id="show-log" data-i18n="show_log" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" href="log.html"></button>
+        <button id="download-log" data-i18n="download_log" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"></button>
+      </div>
+      <div>
+        <button id="force-sync" data-i18n="force_sync" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"></button>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

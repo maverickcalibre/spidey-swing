@@ -1,0 +1,3 @@
+RDP WASM Build Version: 20260917_103036
+Build Date: 2026-09-17T10:30:36.911Z
+Environment: Production

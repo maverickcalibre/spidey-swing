@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="/css/material_icons.css" />
+    <link rel="stylesheet" href="/css/roboto.css" />
+    <link rel="stylesheet" href="/css/material_design_lite.css" />
+    <link rel="stylesheet" href="error.css" />
+    <script src="/mdl_all_js_compiled.js"></script>
+    <script src="error_script.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Loading...</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1 id="heading">Initializing...</h1>
+      <p id="message"></p>
+      <div id="progress-wrapper" class="hidden">
+        <div id="progress" class="mdl-progress mdl-js-progress"></div>
+      </div>
+      <div id="action-wrapper" class="hidden">
+        <button
+          id="action"
+          class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
+        />
+      </div>
+    </div>
+  </body>
+</html>

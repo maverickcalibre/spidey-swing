@@ -1,0 +1,1 @@
+window.onload=function(){initXTerm(),!window.proxyUrl&&sessionStorage.getItem("sshProxyUrl")&&(window.proxyUrl=sessionStorage.getItem("sshProxyUrl")),mod.then((function(o){go.run(o),sshRdpLogger.logInfo(sshRdpModuleName,"Loaded wasm module and Go runtime started.")})).catch((function(o){sshRdpLogger.logError(sshRdpModuleName,"Failed to load WASM: "+o)}))};

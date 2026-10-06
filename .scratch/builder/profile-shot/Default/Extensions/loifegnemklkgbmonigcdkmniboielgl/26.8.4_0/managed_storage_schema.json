@@ -1,0 +1,61 @@
+{
+	"type": "object",
+	"properties": {
+		"citrixPolicies": {
+			"type": "object",
+			"properties": {
+				"spaServiceNodeURL": {
+					"type": "string",
+					"description": "The URL of the SPA service node to be used by the extension."
+				},
+				"gatewayURL": {
+					"type": "string",
+					"description": "The base URL of the gateway service used by the extension for send observability."
+				},
+				"customerID": {
+					"type": "string",
+					"description": "Unique CustomerID associated with the SPA deployment."
+				},
+				"mode": {
+					"type": "integer",
+					"description": "Specifies the deployment type. Use 1 for SPA Cloud or 2 for SPA Hybrid."
+				},
+				"sessionActivityInterval": {
+					"type": "integer",
+					"minimum": 5,
+					"maximum": 30,
+					"description": "Specifies the custom time interval (in minutes) at which the periodic sessionActivity event should be sent. The interval must be between 5 and 30 minutes."
+				},
+				"sessionInfoRefreshInterval": {
+					"type": "integer",
+					"minimum": 5,
+					"maximum": 30,
+					"description": "Specifies the custom time interval (in minutes) at which the sessionInfo will be refreshed periodically. The interval must be between 5 and 30 minutes."
+				},
+				"deploymentType": {
+					"type": "string",
+					"description": "Specifies the deployment type. Allowed values are 'PRODUCTION', 'STAGING' & 'UNKNOWN'."
+				},
+				"environmentType": {
+					"type": "string",
+					"description": "Specifies the environment type. Allowed values are 'COMMERCIAL', 'GOV', 'JAPAN' & 'UNKNOWN'."
+				},
+				"isCustomDomain": {
+					"type": "boolean",
+					"description": "Indicates whether the deployment uses a vanity domain."
+				},
+				"SpaServiceSigningCerts": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"additionalProperties": {
+							"type": "string"
+						}
+					},
+					"description": "Array of signing and root certificates for SPA service JWT validation. Each object contains key-value pairs where keys are KIDs and values are PEM-encoded certificates."
+				}
+			},
+			"description": "Citrix CSA extension policies."
+		}
+	}
+}

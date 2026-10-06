@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Citrix Secure Access</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="popup" data-sync-enabled="false">
+    <header class="popup-header">
+      <img src="icons/logo_placeholder.svg" alt="Citrix glyph" class="logo" />
+      <div class="title-block">
+        <img src="icons/citrix_logo.svg" alt="Citrix" class="citrix-wordmark" />
+        <h1 class="product">Secure Access</h1>
+        <span class="version" id="productVersion"></span>
+      </div>
+    </header>
+
+    <section class="tools-section">
+      <h2 class="tools-heading" data-i18n="popup.tools.heading">Tools</h2>
+      <div class="tools-grid">
+        <button id="sshClientBtn" class="tool-button" aria-label="SSH Client">
+          <img src="icons/ssh_placeholder.svg" alt="SSH Client" class="tool-image" />
+          <span class="tool-label" data-i18n="popup.tools.sshClient">SSH Client</span>
+        </button>
+        <button id="remoteDesktopBtn" class="tool-button" aria-label="Remote Desktop">
+          <img src="icons/rdp_placeholder.svg" alt="Remote Desktop" class="tool-image" />
+          <span class="tool-label" data-i18n="popup.tools.remoteDesktop">Remote Desktop</span>
+        </button>
+        <button id="smbClientBtn" class="tool-button" aria-label="SMB Connections">
+          <img src="icons/ssh_placeholder.svg" alt="SMB Connections" class="tool-image" />
+          <span class="tool-label" data-i18n="popup.tools.smbClient">SMB Connections</span>
+        </button>
+      </div>
+    </section>
+
+    <section id="recordingNotice" class="recording-notice" hidden>
+      <span class="recording-notice-dot" aria-hidden="true"></span>
+      <div class="recording-notice-text">
+        <span class="recording-notice-title" data-i18n="popup.recording.title">Recording browser activity.</span>
+        <span class="recording-notice-subtitle" data-i18n="popup.recording.subtitle">This policy is enforced by your administrator.</span>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="details-section">
+      <h2 class="details-heading" data-i18n="popup.details.heading">Details</h2>
+      <div class="details-content">
+        <div class="details-row">
+          <span class="details-label" data-i18n="popup.details.lastAttemptedSync">Last attempted sync</span>
+          <span class="details-value" id="lastAttemptedSyncValue">—</span>
+        </div>
+        <div class="details-row">
+          <span class="details-label" data-i18n="popup.details.lastSync">Last sync</span>
+          <span class="details-value" id="lastSyncValue">—</span>
+        </div>
+      </div>
+      <button id="syncPoliciesBtn" class="sync-button" data-i18n="popup.details.syncPolicies">Sync policies</button>
+    </section>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

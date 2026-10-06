@@ -1,0 +1,75 @@
+{
+   "action": {
+      "default_icon": {
+         "128": "icon128.png",
+         "16": "icon16.png",
+         "32": "icon32.png",
+         "48": "icon48.png"
+      },
+      "default_popup": "Popup/popup.html"
+   },
+   "background": {
+      "service_worker": "service_worker.js"
+   },
+   "content_scripts": [ {
+      "js": [ "content.js" ],
+      "matches": [ "http://*/*", "https://*/*" ],
+      "run_at": "document_start"
+   }, {
+      "exclude_matches": [ "https://accounts.google.com/*" ],
+      "js": [ "logoutWarningOverlay.js" ],
+      "matches": [ "http://*/*", "https://*/*" ],
+      "run_at": "document_idle"
+   }, {
+      "js": [ "interceptor.js" ],
+      "matches": [ "https://ssh.netscalergateway.net/*", "https://rdp.netscalergateway.net/*", "https://smb.netscalergateway.net/*" ],
+      "run_at": "document_start"
+   } ],
+   "content_security_policy": {
+      "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; object-src 'self'"
+   },
+   "declarative_net_request": {
+      "rule_resources": [ {
+         "enabled": true,
+         "id": "ruleset_1",
+         "path": "citrixssh/rules.json"
+      } ]
+   },
+   "description": "Secure Access Extension from Citrix for Chrome Enterprise.",
+   "host_permissions": [ "http://*/*", "https://*/*", "ws://*/*", "wss://*/*" ],
+   "icons": {
+      "128": "icon128.png",
+      "16": "icon16.png",
+      "32": "icon32.png",
+      "48": "icon48.png"
+   },
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmpIrSZxRiEVxQ6IffJZGqHjQmLIryGfM5EBJYcU/4gzTcNSepKZeQe+/rz4daf8lxlInfBgVEjEWpUY8DgUw7RIWiVyt8WHBCHKl6qPG13dXi+9KHKTVQSc21QLPnP2K5vOLYgPyVLGr16X0WPPOMtEkIjWlQHmtnkwHTf/zy+SPDXOxcbsRlyJ7xDCMs3iqSbSuf+qTWDVpwRDUANzVXLFQ3UsUbFwjDRljCJraCMCzgsiYBAMKwVw97kpuGchUAmGF6ywP7DwuG4Lu+QIQR85kkEfL77nZqbvZ4JfsVo3k/kv0EF0lR5ENeDuByw3hCmKTXK/NpGA1fzRZL/v+4QIDAQAB",
+   "manifest_version": 3,
+   "minimum_chrome_version": "138",
+   "name": "Citrix Secure Access",
+   "omnibox": {
+      "keyword": "citrixssh"
+   },
+   "permissions": [ "alarms", "tabs", "storage", "webNavigation", "webRequest", "contextMenus", "downloads", "nativeMessaging", "cookies", "declarativeNetRequestWithHostAccess", "activeTab", "scripting", "identity", "identity.email", "offscreen" ],
+   "storage": {
+      "managed_schema": "managed_storage_schema.json"
+   },
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "26.8.4",
+   "web_accessible_resources": [ {
+      "matches": [ "https://ssh.netscalergateway.net/*" ],
+      "resources": [ "citrixssh/*", "Resources/Images/*.svg", "locales/*", "Localization/*.js", "ui/js/*" ]
+   }, {
+      "matches": [ "https://rdp.netscalergateway.net/*" ],
+      "resources": [ "citrixrdp/*", "Resources/Images/*.svg", "ui/js/*", "locales/*", "Localization/*.js" ]
+   }, {
+      "matches": [ "\u003Call_urls>" ],
+      "resources": [ "ErrorHandling/*", "SSHRDPFeatureDisabled.html" ]
+   }, {
+      "matches": [ "https://smb.netscalergateway.net/*" ],
+      "resources": [ "smb/wasm/*", "smb/offscreen/*", "smb/ui/*", "Resources/Images/*.svg", "locales/*", "Localization/*.js" ]
+   }, {
+      "matches": [ "https://*/*" ],
+      "resources": [ "clipboard_page_context.js" ]
+   } ]
+}

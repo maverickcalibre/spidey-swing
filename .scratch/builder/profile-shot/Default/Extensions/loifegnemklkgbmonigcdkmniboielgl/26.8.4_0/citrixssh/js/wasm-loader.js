@@ -1,0 +1,1 @@
+function fetchAndInstantiate(t,n){return fetch(t).then((t=>t.arrayBuffer())).then((t=>WebAssembly.instantiate(t,n))).then((t=>t.instance))}var go=new Go,mod=fetchAndInstantiate("main.wasm",go.importObject);

@@ -1,0 +1,780 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Citrix SMB Connections</title>
+		<link rel="stylesheet" href="./smb-tab.css" />
+	</head>
+
+	<body>
+		<!-- ====================================================================
+    VIEW 1: Connect — enter network location
+  ===================================================================== -->
+		<div id="smb-connect-view" class="smb-view smb-split-container">
+			<div class="smb-left-panel">
+				<div class="smb-logo-row">
+					<div class="smb-icon-badge">SMB</div>
+					<span class="smb-brand-text">Citrix <strong>SMB Connections</strong></span>
+				</div>
+				<div class="smb-left-illustration" aria-hidden="true">
+					<img src="../../Resources/Images/citrix_brand_icon.svg" alt="Citrix Brand Icon" />
+				</div>
+			</div>
+
+			<div class="smb-right-panel">
+				<div class="smb-main-content">
+					<div class="smb-page-title">Connect to SMB Shares</div>
+
+					<div class="smb-columns">
+						<!-- Favorites -->
+						<div class="smb-favourites-section">
+							<div class="smb-section-title-row">
+								<div class="smb-section-title-left">
+									<img
+										src="../../Resources/Images/citrix_ssh_favourite_icon.svg"
+										alt="Favorites Icon"
+										width="20"
+										height="20"
+									/>
+									<span class="smb-section-heading">Favorites</span>
+								</div>
+							</div>
+							<hr class="smb-divider" />
+							<div id="smb-fav-empty" class="smb-fav-empty-state">
+								<img
+									src="../../Resources/Images/citrix_gray_favourite_icon.svg"
+									alt="Star"
+									style="width: 40px; height: 40px; margin-bottom: 8px"
+								/>
+								<div class="smb-no-fav-title">No favorites added yet</div>
+								<div class="smb-no-fav-desc">
+									<span data-i18n="smb.addFavHint"
+										>Connect to a server and check "Add as favorite" for quick access</span
+									>
+								</div>
+							</div>
+							<div class="smb-favourites-list" id="smb-fav-list" style="display: none"></div>
+						</div>
+
+						<!-- Connection Details -->
+						<div class="smb-connection-section">
+							<div class="smb-section-title-row">
+								<div class="smb-section-title-left">
+									<img
+										src="../../Resources/Images/citrix_ssh_connection_icon.svg"
+										alt="Connection Icon"
+										width="20"
+										height="20"
+									/>
+									<span class="smb-section-heading">Connection Details</span>
+								</div>
+							</div>
+							<hr class="smb-divider" />
+							<label for="smb-network-location">Network Location</label>
+							<input
+								id="smb-network-location"
+								type="text"
+								placeholder="E.g. 192.168.1.100"
+								autocomplete="off"
+								class="smb-input"
+							/>
+							<div class="smb-field-hint">Enter the hostname or IP address of the SMB server</div>
+							<div id="smb-location-error" class="smb-error-msg" style="display: none"></div>
+							<button type="button" class="smb-add-fav-link" id="smb-add-fav-connect">
+								<img
+									src="../../Resources/Images/citrix_add_ssh_favourite_icon.svg"
+									alt="Add as favorite"
+									width="18"
+									height="18"
+								/>
+								Add as favorite
+							</button>
+							<button type="button" class="smb-connect-btn" id="smb-connect-btn">
+								<span class="smb-btn-spinner" aria-hidden="true"></span>
+								<span class="smb-btn-text">Connect</span>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- ====================================================================
+    VIEW 2: Auth — enter credentials
+  ===================================================================== -->
+		<div id="smb-auth-view" class="smb-view smb-split-container" style="display: none">
+			<div class="smb-left-panel">
+				<div class="smb-logo-row">
+					<div class="smb-icon-badge">SMB</div>
+					<span class="smb-brand-text">Citrix <strong>SMB Connections</strong></span>
+				</div>
+				<div class="smb-left-illustration" aria-hidden="true">
+					<img src="../../Resources/Images/citrix_brand_icon.svg" alt="Citrix Brand Icon" />
+				</div>
+			</div>
+
+			<div class="smb-right-panel">
+				<div class="smb-main-content">
+					<div class="smb-page-title">Connect to SMB Shares</div>
+
+					<div class="smb-columns">
+						<!-- Favorites -->
+						<div class="smb-favourites-section">
+							<div class="smb-section-title-row">
+								<div class="smb-section-title-left">
+									<img
+										src="../../Resources/Images/citrix_ssh_favourite_icon.svg"
+										alt="Favorites Icon"
+										width="20"
+										height="20"
+									/>
+									<span class="smb-section-heading">Favorites</span>
+								</div>
+							</div>
+							<hr class="smb-divider" />
+							<div id="smb-auth-fav-empty" class="smb-fav-empty-state">
+								<img
+									src="../../Resources/Images/citrix_gray_favourite_icon.svg"
+									alt="Star"
+									style="width: 40px; height: 40px; margin-bottom: 8px"
+								/>
+								<div class="smb-no-fav-title">No favorites added yet</div>
+								<div class="smb-no-fav-desc">
+									<span data-i18n="smb.addFavHint"
+										>Connect to a server and check "Add as favorite" for quick access</span
+									>
+								</div>
+							</div>
+							<div class="smb-favourites-list" id="smb-auth-fav-list" style="display: none"></div>
+						</div>
+
+						<!-- Auth form -->
+						<div class="smb-connection-section">
+							<div class="smb-section-title-row">
+								<div class="smb-section-title-left">
+									<img
+										src="../../Resources/Images/citrix_ssh_connection_icon.svg"
+										alt="Connection Icon"
+										width="20"
+										height="20"
+									/>
+									<span class="smb-section-heading">Connection Details</span>
+								</div>
+							</div>
+							<hr class="smb-divider" />
+							<div class="smb-auth-server-hint" id="smb-auth-hint" aria-live="polite"></div>
+							<label for="smb-username">Username</label>
+							<input
+								id="smb-username"
+								type="text"
+								placeholder="Enter Username"
+								data-i18n-placeholder="smb.enterUsername"
+								autocomplete="username"
+								class="smb-input"
+							/>
+							<div id="smb-username-error" class="smb-error-msg" style="display: none"></div>
+							<label for="smb-password">Password</label>
+							<input
+								id="smb-password"
+								type="password"
+								placeholder="Enter Password"
+								data-i18n-placeholder="smb.enterPassword"
+								autocomplete="current-password"
+								class="smb-input"
+							/>
+							<div id="smb-password-error" class="smb-error-msg" style="display: none"></div>
+							<div id="smb-auth-error" class="smb-error-msg" style="display: none"></div>
+							<div style="display: none">
+								<input
+									id="smb-domain"
+									type="text"
+									placeholder="WORKGROUP"
+									autocomplete="off"
+									class="smb-input"
+								/>
+								<input
+									id="smb-proxy-url"
+									type="text"
+									placeholder="ws://localhost:8080"
+									autocomplete="off"
+									class="smb-input"
+								/>
+							</div>
+							<button type="button" class="smb-add-fav-link" id="smb-add-fav-auth">
+								<img
+									src="../../Resources/Images/citrix_add_ssh_favourite_icon.svg"
+									alt="Add as favorite"
+									width="18"
+									height="18"
+								/>
+								Add as favorite
+							</button>
+							<div class="smb-auth-btn-row">
+								<button type="button" class="smb-back-btn" id="smb-back-btn">Back</button>
+								<button type="button" class="smb-sign-in-btn" id="smb-sign-in-btn">Sign In</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- ====================================================================
+    CONNECTED HEADER — persistent bar shown in Views 3 and 4
+  ===================================================================== -->
+		<div id="smb-connected-header" style="display: none" role="banner">
+			<div class="smb-header-inner">
+				<div class="smb-header-left">
+					<svg
+						class="smb-header-folder-icon"
+						width="30"
+						height="30"
+						viewBox="0 0 24 24"
+						fill="none"
+						aria-hidden="true"
+					>
+						<path
+							d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V7z"
+							fill="#2563eb"
+						/>
+					</svg>
+					<div>
+						<div class="smb-header-title">Connected to SMB Server</div>
+						<div class="smb-header-subtitle" id="smb-connected-server"></div>
+					</div>
+				</div>
+				<button type="button" class="smb-disconnect-btn" id="smb-disconnect-btn">
+					<svg
+						width="15"
+						height="15"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						aria-hidden="true"
+					>
+						<path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
+						<polyline points="16 17 21 12 16 7" />
+						<line x1="21" y1="12" x2="9" y2="12" />
+					</svg>
+					Disconnect
+				</button>
+			</div>
+			<hr class="smb-header-rule" />
+		</div>
+
+		<!-- ====================================================================
+    VIEW 3: Share List
+  ===================================================================== -->
+		<div
+			id="smb-shares-view"
+			class="smb-view"
+			style="display: none"
+			role="main"
+			aria-label="Share list"
+		>
+			<div class="smb-shares-page">
+				<div class="smb-shares-title">Available Shares</div>
+				<hr class="smb-shares-divider" />
+				<div id="smb-share-list" class="smb-share-list" role="list">
+					<!-- Populated by renderShares() -->
+				</div>
+			</div>
+		</div>
+
+		<!-- ====================================================================
+    VIEW 4: File Browser
+  ===================================================================== -->
+		<div
+			id="smb-files-view"
+			class="smb-view"
+			style="display: none"
+			role="main"
+			aria-label="File browser"
+		>
+			<div class="smb-files-page">
+				<!-- Toolbar -->
+				<div class="smb-toolbar" role="toolbar" aria-label="File actions">
+					<div class="smb-toolbar-left">
+						<button type="button" class="smb-toolbar-btn smb-new-btn" id="smb-new-folder-btn">
+							<svg
+								width="14"
+								height="14"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								aria-hidden="true"
+							>
+								<path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z" />
+							</svg>
+							New Folder
+						</button>
+
+						<button
+							type="button"
+							class="smb-toolbar-btn smb-toolbar-download-btn"
+							id="smb-toolbar-download-btn"
+							disabled
+							aria-disabled="true"
+						>
+							<svg
+								width="13"
+								height="13"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								aria-hidden="true"
+							>
+								<path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+								<polyline points="7 10 12 15 17 10" />
+								<line x1="12" y1="15" x2="12" y2="3" />
+							</svg>
+							<span data-i18n="smb.download">Download</span>
+						</button>
+
+						<button
+							type="button"
+							class="smb-toolbar-btn smb-move-btn"
+							id="smb-move-btn"
+							disabled
+							aria-disabled="true"
+						>
+							<svg
+								width="13"
+								height="13"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								aria-hidden="true"
+							>
+								<polyline points="5 9 2 12 5 15" />
+								<polyline points="9 5 12 2 15 5" />
+								<line x1="2" y1="12" x2="22" y2="12" />
+								<line x1="12" y1="2" x2="12" y2="22" />
+							</svg>
+							Move
+						</button>
+
+						<button
+							type="button"
+							class="smb-toolbar-btn smb-delete-btn"
+							id="smb-delete-btn"
+							disabled
+							aria-disabled="true"
+						>
+							<svg
+								width="13"
+								height="13"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								aria-hidden="true"
+							>
+								<polyline points="3 6 5 6 21 6" />
+								<path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6" />
+								<path d="M10 11v6" />
+								<path d="M14 11v6" />
+								<path d="M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2" />
+							</svg>
+							Delete
+						</button>
+
+						<button type="button" class="smb-toolbar-btn smb-upload-btn" id="smb-upload-btn">
+							<svg
+								width="13"
+								height="13"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								aria-hidden="true"
+							>
+								<polyline points="16 16 12 12 8 16" />
+								<line x1="12" y1="12" x2="12" y2="21" />
+								<path d="M20.39 18.39A5 5 0 0018 9h-1.26A8 8 0 103 16.3" />
+							</svg>
+							Upload
+						</button>
+
+						<button type="button" class="smb-toolbar-btn smb-refresh-btn" id="smb-refresh-btn">
+							<svg
+								width="13"
+								height="13"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								aria-hidden="true"
+							>
+								<polyline points="23 4 23 10 17 10" />
+								<path d="M20.49 15a9 9 0 11-2.12-9.36L23 10" />
+							</svg>
+							Refresh
+						</button>
+					</div>
+				</div>
+
+				<!-- Breadcrumb -->
+				<nav class="smb-breadcrumb" aria-label="File path" id="smb-breadcrumb-nav"></nav>
+
+				<!-- File table -->
+				<div class="smb-table-wrap">
+					<table class="smb-file-table" aria-label="File browser">
+						<thead>
+							<tr>
+								<th class="smb-col-check">
+									<input type="checkbox" id="smb-select-all" aria-label="Select all" />
+								</th>
+								<th class="smb-col-name">NAME</th>
+								<th class="smb-col-size">SIZE</th>
+								<th class="smb-col-modified">MODIFIED</th>
+								<th class="smb-col-actions">ACTIONS</th>
+							</tr>
+						</thead>
+						<tbody id="smb-file-table-body">
+							<!-- Populated by renderFiles() -->
+						</tbody>
+					</table>
+					<div
+						id="smb-files-empty"
+						class="smb-files-empty"
+						style="display: none"
+						data-i18n="smb.noFilesFound"
+					>
+						No files found.
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- ====================================================================
+    LOADING OVERLAY
+  ===================================================================== -->
+		<div
+			id="smb-loading-overlay"
+			class="smb-loading-overlay"
+			style="display: none"
+			aria-live="polite"
+		>
+			<div class="smb-spinner"></div>
+			<span id="smb-loading-text">Loading&#8230;</span>
+		</div>
+
+		<!-- ====================================================================
+    ACCESS RESTRICTED DIALOG
+  ===================================================================== -->
+		<div
+			id="smb-access-restricted-dialog"
+			class="smb-modal"
+			style="display: none"
+			role="dialog"
+			aria-modal="true"
+			aria-labelledby="smb-access-restricted-title"
+		>
+			<div class="smb-modal-content smb-access-restricted-content">
+				<div class="smb-access-restricted-header">
+					<div class="smb-access-restricted-title-row">
+						<svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+							<path
+								d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V7L12 2z"
+								fill="#b91c1c"
+							/>
+							<path d="M11 8h2v5h-2V8zm0 7h2v2h-2v-2z" fill="white" />
+						</svg>
+						<h3 id="smb-access-restricted-title">Access Restricted</h3>
+					</div>
+					<button
+						type="button"
+						id="smb-access-restricted-close"
+						class="smb-popup-close"
+						aria-label="Close"
+					>
+						&#x2715;
+					</button>
+				</div>
+				<hr class="smb-access-restricted-divider" />
+				<p id="smb-access-restricted-path" class="smb-access-restricted-path"></p>
+				<p class="smb-access-restricted-desc" data-i18n="smb.accessRestricted">
+					You don't have permission to access this share. Contact your administrator to request
+					access.
+				</p>
+				<hr class="smb-access-restricted-divider" />
+				<div class="smb-modal-actions smb-access-restricted-actions">
+					<button type="button" class="smb-sign-in-btn" id="smb-access-restricted-ok">Ok</button>
+				</div>
+			</div>
+		</div>
+
+		<!-- ====================================================================
+    RENAME DIALOG
+  ===================================================================== -->
+		<div
+			id="smb-rename-dialog"
+			class="smb-modal"
+			style="display: none"
+			role="dialog"
+			aria-modal="true"
+			aria-labelledby="smb-rename-title"
+		>
+			<div class="smb-modal-content">
+				<h3 id="smb-rename-title">Rename</h3>
+				<input type="text" id="smb-rename-input" class="smb-input" />
+				<div id="smb-rename-error" class="smb-error-msg" style="display: none"></div>
+				<div class="smb-modal-actions">
+					<button type="button" class="smb-back-btn" id="smb-rename-cancel">Cancel</button>
+					<button type="button" class="smb-sign-in-btn" id="smb-rename-confirm">Rename</button>
+				</div>
+			</div>
+		</div>
+
+		<!-- ====================================================================
+    NEW FOLDER DIALOG
+  ===================================================================== -->
+		<div
+			id="smb-new-folder-dialog"
+			class="smb-modal"
+			style="display: none"
+			role="dialog"
+			aria-modal="true"
+			aria-labelledby="smb-new-folder-title"
+		>
+			<div class="smb-modal-content">
+				<h3 id="smb-new-folder-title">New Folder</h3>
+				<input type="text" id="smb-new-folder-input" class="smb-input" placeholder="Folder name" />
+				<div id="smb-new-folder-error" class="smb-error-msg" style="display: none"></div>
+				<div class="smb-modal-actions">
+					<button type="button" class="smb-back-btn" id="smb-new-folder-cancel">Cancel</button>
+					<button type="button" class="smb-sign-in-btn" id="smb-new-folder-confirm">Create</button>
+				</div>
+			</div>
+		</div>
+
+		<!-- ====================================================================
+    DELETE DIALOG
+  ===================================================================== -->
+		<div
+			id="smb-delete-dialog"
+			class="smb-modal"
+			style="display: none"
+			role="dialog"
+			aria-modal="true"
+			aria-labelledby="smb-delete-title"
+		>
+			<div class="smb-modal-content">
+				<h3 id="smb-delete-title">Confirm Delete</h3>
+				<p id="smb-delete-message"></p>
+				<div id="smb-delete-error" class="smb-error-msg" style="display: none"></div>
+				<div class="smb-modal-actions">
+					<button type="button" class="smb-back-btn" id="smb-delete-cancel">Cancel</button>
+					<button type="button" class="smb-disconnect-btn" id="smb-delete-confirm">Delete</button>
+				</div>
+			</div>
+		</div>
+
+		<!-- ====================================================================
+    MOVE DIALOG
+  ===================================================================== -->
+		<div
+			id="smb-move-dialog"
+			class="smb-modal"
+			style="display: none"
+			role="dialog"
+			aria-modal="true"
+			aria-labelledby="smb-move-title"
+		>
+			<div class="smb-modal-content smb-move-modal-content">
+				<div class="smb-move-header">
+					<div>
+						<h3 id="smb-move-title">Move Items</h3>
+						<p id="smb-move-subtitle" class="smb-move-subtitle"></p>
+					</div>
+					<button type="button" class="smb-popup-close" id="smb-move-close" aria-label="Close">
+						&#x2715;
+					</button>
+				</div>
+				<p class="smb-move-select-label">Select destination folder</p>
+				<ul
+					id="smb-move-folder-list"
+					class="smb-move-folder-list"
+					role="listbox"
+					aria-label="Destination folders"
+				>
+					<!-- Populated dynamically -->
+				</ul>
+				<div id="smb-move-destination-row" class="smb-move-destination-row" style="display: none">
+					Moving to: <strong id="smb-move-dest-label"></strong>
+				</div>
+				<div id="smb-move-error" class="smb-error-msg" style="display: none"></div>
+				<div class="smb-modal-actions">
+					<button type="button" class="smb-back-btn" id="smb-move-cancel">Cancel</button>
+					<button type="button" class="smb-sign-in-btn" id="smb-move-confirm" disabled>Move</button>
+				</div>
+			</div>
+		</div>
+
+		<!-- ====================================================================
+    FAVOURITE NAME POPUP
+  ===================================================================== -->
+		<div
+			id="smb-popup-overlay"
+			class="smb-popup-overlay"
+			style="display: none"
+			role="dialog"
+			aria-modal="true"
+			aria-labelledby="smb-popup-title"
+		>
+			<div class="smb-popup-modal">
+				<div class="smb-popup-header">
+					<h3 id="smb-popup-title">Save Favourite</h3>
+					<button type="button" class="smb-popup-close" id="smb-popup-close" aria-label="Close">
+						&#x2715;
+					</button>
+				</div>
+				<label for="smb-popup-fav-name">Name</label>
+				<input id="smb-popup-fav-name" type="text" class="smb-input" placeholder="My Server" />
+				<div id="smb-popup-error" class="smb-error-msg" style="display: none"></div>
+				<div class="smb-modal-actions">
+					<button type="button" class="smb-back-btn" id="smb-popup-cancel">Cancel</button>
+					<button type="button" class="smb-sign-in-btn" id="smb-popup-save">Save</button>
+				</div>
+			</div>
+		</div>
+
+		<!-- ====================================================================
+    TOAST NOTIFICATIONS — transient, non-blocking messages (top-right)
+  ===================================================================== -->
+		<div
+			id="smb-toast-container"
+			class="smb-toast-container"
+			aria-live="polite"
+			aria-atomic="false"
+		></div>
+
+		<!-- Template: Favourite row -->
+		<template id="smb-fav-item-template">
+			<div class="smb-fav-cell">
+				<div class="smb-fav-left">
+					<div class="smb-fav-name"></div>
+					<div class="smb-fav-host"></div>
+				</div>
+				<button
+					type="button"
+					class="smb-fav-delete"
+					title="Remove favourite"
+					data-i18n-title="smb.removeFavourite"
+					aria-label="Remove favourite"
+					data-i18n-aria="smb.removeFavourite"
+				>
+					<svg
+						width="15"
+						height="15"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="#9ca3af"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						aria-hidden="true"
+					>
+						<circle cx="12" cy="12" r="10" />
+						<line x1="15" y1="9" x2="9" y2="15" />
+						<line x1="9" y1="9" x2="15" y2="15" />
+					</svg>
+				</button>
+			</div>
+		</template>
+
+		<!-- Upload modal dialog -->
+		<div
+			id="smb-upload-modal"
+			class="smb-modal smb-upload-modal"
+			style="display: none"
+			role="dialog"
+			aria-modal="true"
+			aria-labelledby="smb-upload-modal-title"
+		>
+			<div id="smb-upload-modal-content" class="smb-upload-modal-content">
+				<div id="smb-upload-modal-header" class="smb-upload-modal-header">
+					<h3 id="smb-upload-modal-title" data-i18n="smb.uploadFiles">Upload Files</h3>
+					<button
+						type="button"
+						class="smb-popup-close"
+						id="smb-upload-modal-close"
+						aria-label="Close"
+					>
+						&#x2715;
+					</button>
+				</div>
+				<div
+					id="smb-upload-dropzone"
+					class="smb-upload-dropzone"
+					tabindex="0"
+					role="button"
+					aria-label="Click to browse or drag files here"
+				>
+					<svg
+						width="40"
+						height="40"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="#9ca3af"
+						stroke-width="1.5"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						aria-hidden="true"
+					>
+						<polyline points="16 16 12 12 8 16" />
+						<line x1="12" y1="12" x2="12" y2="21" />
+						<path d="M20.39 18.39A5 5 0 0018 9h-1.26A8 8 0 103 16.3" />
+					</svg>
+					<p class="smb-upload-dropzone-label" data-i18n="smb.clickToBrowse">
+						Click to browse or drag files here
+					</p>
+					<p id="smb-upload-modal-path" class="smb-upload-dropzone-path" data-i18n="smb.uploadTo">
+						Upload to: /
+					</p>
+				</div>
+				<input
+					type="file"
+					id="smb-upload-input"
+					style="display: none"
+					aria-hidden="true"
+					tabindex="-1"
+					multiple
+				/>
+			</div>
+		</div>
+
+		<!-- Download tray — one card per parallel download, appended dynamically -->
+		<div
+			id="smb-download-tray"
+			class="smb-download-tray"
+			aria-live="polite"
+			aria-label="Downloads"
+		></div>
+
+		<!-- Upload tray — one card per in-progress upload, appended dynamically -->
+		<div id="smb-upload-tray" class="smb-upload-tray" aria-live="polite" aria-label="Uploads"></div>
+
+		<script type="module" src="./smb-tab.js"></script>
+	</body>
+</html>

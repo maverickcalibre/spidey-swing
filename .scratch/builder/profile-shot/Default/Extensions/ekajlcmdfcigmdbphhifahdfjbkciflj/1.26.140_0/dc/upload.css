@@ -1,0 +1,119 @@
+html,
+body {
+  font-family: 'Roboto', 'Segoe UI', 'Lucida Grande', 'Tahoma', 'sans-serif';
+  font-size: 14px;
+  background-color: #f4f4f4;
+  color: #333;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  width: 100%;
+}
+.dc-hidden {
+  display: none;
+}
+.main-container {
+  margin: 20px;
+}
+#header-container {
+  background-color: #f5f5f5;
+  padding: 5px 20px 5px 20px;
+}
+#product-name {
+  color: #3c4043;
+}
+#user-id,
+#percent {
+  color:rgb(0, 71, 126);
+  float: right;
+}
+#progress-text {
+  color: #3c4043;
+  float: left;
+}
+// For information on <progress> tag, see
+// http://trac.webkit.org/wiki/Styling%20Form%20Controls
+#upload-progress {
+  -webkit-appearance: none;
+  height: 12px;
+  width: 100%;
+}
+#upload-progress::-webkit-progress-bar {
+  background-color: transparent;
+  border: 1px solid #999;
+}
+#upload-progress::-webkit-progress-value {
+  background-color: #ccc;
+}
+#file-icon {
+  display: inline-block;
+  vertical-align: bottom;
+  width: 16px;
+  height: 16px;
+}
+#change-text {
+  margin-left: 6px;
+}
+#results-text {
+  display: inline-block;
+  float: left;
+  margin: 0 5px;
+  position: absolute;
+}
+#rename-input {
+  -webkit-box-sizing: border-box;
+  width: 100%;
+}
+#error-text {
+  color: #f00;
+}
+#button-container {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  width: 100%;
+}
+#button-action-container {
+  bottom: 20px;
+  left: 20px;
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+}
+#button-option-container {
+  bottom: 20px;
+  position: absolute;
+  right: 20px;
+  display: flex;
+  flex-direction: row;
+}
+.dc-button {
+  margin: 5px;
+  background-color: #e7e7e7;
+  color: black;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  /* display: inline-block; */
+}
+.dc-button:hover {
+  cursor: pointer;
+  background-color:rgb(213, 213, 213);
+}
+.use-browser-action-img {
+  float: right;
+  margin: 15px 0 0 10px;
+}
+.use-browser-action-msg {
+  margin-top: -10px;
+}
+.use-browser-action-title {
+  font-weight: bold;
+}
+.use-browser-action-body {
+  margin-top: 8px;
+}
+.no-break {
+  white-space: nowrap;
+}

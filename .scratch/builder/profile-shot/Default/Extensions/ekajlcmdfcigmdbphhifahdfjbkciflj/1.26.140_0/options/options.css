@@ -1,0 +1,50 @@
+html {
+  height: auto;
+}
+
+body {
+  font-family: 'Segoe UI', 'Lucida Grande', Tahoma, sans-serif;
+  min-width: 640px;
+  min-height: 360px;
+  font-size: 100%;
+  direction: __MSG_@@bidi_dir__;
+}
+
+#title {
+  background: #6f6f6f;
+  display: block;
+  padding-top: 15px;
+  padding-__MSG_@@bidi_start_edge__: 18px;
+  padding-bottom: 10px;
+  padding-__MSG_@@bidi_end_edge__: 20px;
+}
+
+section, .mdl-layout__content {
+  padding: 20px 20px 28px 20px;
+}
+
+.setting_label {
+  font-weight: 700;
+}
+
+.setting_row {
+  width: 100%;
+  display: flex;
+}
+
+.setting_group {
+  width: 150px;
+}
+
+#folder-picker-button {
+  margin-top: 10px;
+  text-transform: none;
+}
+
+.checkbox-container {
+  display: inline-flex;
+}
+
+.mdl-checkbox {
+  margin-left: 10px;
+}

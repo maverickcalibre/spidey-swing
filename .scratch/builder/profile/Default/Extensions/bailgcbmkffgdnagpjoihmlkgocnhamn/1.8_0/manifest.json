@@ -1,0 +1,30 @@
+{
+   "action": {
+      "default_icon": "icons/logo128.png",
+      "default_popup": "index.html",
+      "default_title": "Generate QR Code"
+   },
+   "background": {
+      "service_worker": "background.js",
+      "type": "module"
+   },
+   "content_scripts": [ {
+      "js": [ "include/qrcode.min.js", "include/jquery.js", "content.js" ],
+      "matches": [ "https://live.pureauth.io/*", "https://dev.pureauth.tech/*" ]
+   } ],
+   "description": "This chrome extension will generate a modified qr code from the pureauth page.",
+   "host_permissions": [ "https://live.pureauth.io/*", "https://dev.pureauth.tech/*" ],
+   "icons": {
+      "128": "icons/logo128.png",
+      "16": "icons/logo16.png",
+      "32": "icons/logo32.png",
+      "48": "icons/logo48.png"
+   },
+   "incognito": "split",
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjM1IcWTHesj/JOcaP2ONHqc71q6d2KxQJSuG6p/nfVbrNGAHJFkthkFiVtYxakmwe2xA4Hh+QZLsdE/Z20qMAIN9IikRdkeYSPBiQbExtmFrby6MH+xRIDXLLaJECPbdSgNlvZzjwjDoDRwLoSWDk8v6P3r+EYpR0f/0cABC3wYr3Sjdp5Fdk5cVDwp45LWE1fU8+3FmOhidnVP+34aLwtXkvk+9SvhVwvHWSnhkfrwVK3N54ae4GMyPqiUuUwjwTK7ZvGmye/V2c7ATqBhzXWH0ZIk4qpy3LRG7PB7dfGOwKmHgSTujEfTTW1AWo5TJfzh/7KySz9dkCqJT/f5evwIDAQAB",
+   "manifest_version": 3,
+   "name": "PureAUTH - AFore",
+   "permissions": [ "activeTab", "storage" ],
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "1.8"
+}

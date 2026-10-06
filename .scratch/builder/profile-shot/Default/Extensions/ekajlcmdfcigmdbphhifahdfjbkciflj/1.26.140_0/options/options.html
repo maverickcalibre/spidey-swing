@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="/css/material_icons.css">
+  <link rel="stylesheet" href="/css/roboto.css">
+  <link rel="stylesheet" href="/css/material_design_lite.css">
+  <link rel="stylesheet" href="options.css">
+  <script src="/mdl_all_js_compiled.js"></script>
+  <script src="options_script.js"></script>
+  <meta charset="utf-8">
+  <title data-i18n="options_page_title">(Loading)</title>
+</head>
+<body>
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--no-drawer-button">
+    <header class="mdl-layout__header">
+      <div id="header" class="mdl-layout__header-row">
+        <span id="options-title" data-i18n="troubleshooting_section_title" class="mdl-layout-title">(Loading)</span>
+      </div>
+    </header>
+    <section>
+      <span class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <label data-i18n="log_level_label" class="mdl-textfield__label" for="log-level"></label>
+        <select class="mdl-textfield__input" id="log-level" name="log-level">
+          <option value="1000">Error</option>
+          <option value="900">Warning</option>
+          <option value="800">Info</option>
+          <option value="600">Debug</option>
+          <option value="100">Trace</option>
+          <option value="0">All</option>
+        </select>
+      </span>
+      <button id="show-log" data-i18n="show_log" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" href="log.html"></button>
+      <button id="download-log" data-i18n="download_log" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"></button>
+      <div style="display: inline-block; vertical-align: top; margin-right: 15px;">
+        <span class="mdl-typography--caption mdl-color-text--primary" data-i18n="diagnostic_label" style="display: block; margin-bottom: 8px;"></span>
+        <button id="diagnostic-page" data-i18n="diagnostic_page" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"></button>
+      </div>
+    </section>
+    <header class="mdl-layout__header" id="download_control_settings_header">
+      <div id="header" class="mdl-layout__header-row">
+        <span id="options-title" data-i18n="data_control_section_title" class="mdl-layout-title"></span>
+      </div>
+    </header>
+    <div id="download_control_settings">
+      <section>
+        <div class="setting_row">
+          <div class="setting_group">
+            <label data-i18n="userid_email_label" class="setting_label" for="userid-email"></label>
+          </div>
+          <div class="setting_value">
+            <span id="user-id-email"></span>
+          </div>
+        </div>
+        <hr>
+        <div class="setting_row" style="display: none">
+          <div class="setting_group">
+            <label data-i18n="folder_settings_label" class="setting_label" for="folder-picker-button"></label>
+          </div>
+          <div class="setting_value">
+            <span id="drive-current-folder">My Drive</span>
+            <br>
+            <button id="folder-picker-button" data-i18n="folder_picker_button_text" class="mdl-button mdl-js-button mdl-button--raised mdl-button--outlined"></button>
+          </div>
+        </div>
+        <hr style="display: none">
+        <div class="setting_row" id="misc-settings">
+          <div class="setting_group">
+            <label data-i18n="misc_section_label" class="setting_label" for="folder-picker-button"></label>
+          </div>
+          <div class="setting_value">
+            <span class="checkbox-container">
+              <input type="checkbox" id="convert-checkbox" class="mdl-checkbox__input">
+              <label data-i18n="auto_convert_label" for="convert-checkbox" class="mdl-checkbox"></label>
+            </span>
+            <br>
+            <span class="checkbox-container">
+              <input type="checkbox" id="open-saved-file-checkbox" class="mdl-checkbox__input">
+              <label data-i18n="open_saved_file_label" for="open-saved-file-checkbox" class="mdl-checkbox"></label>
+            </span>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</body>
+</html>

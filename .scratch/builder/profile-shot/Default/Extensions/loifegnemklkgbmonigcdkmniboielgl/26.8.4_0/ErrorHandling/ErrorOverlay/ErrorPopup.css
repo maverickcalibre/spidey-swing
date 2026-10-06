@@ -1,0 +1,276 @@
+
+/* Custom font definition for Citrix Public Sans */
+@font-face {
+  font-family: 'CtxPublicSans';
+  src: url("../../fonts/PublicSans-Regular.otf") format("opentype");
+}
+
+:root {
+  --text-family: CtxPublicSans;
+  --primary-blue: #003894;
+  --light-gray: #757575;
+  --dark-gray: #555555;
+  --border-radius-btn: 19px;
+}
+
+.popup-body {
+  padding: 20px 20px 20px 20px;
+  background: #fff;
+  overflow: hidden;
+}
+
+.error-row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.error-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 18px;
+  margin-top: 3px;
+  margin-bottom: 8px;
+  flex-shrink: 0; /* Prevent icon from shrinking */
+  display: block;
+}
+
+.main-error {
+  font-family: var(--text-family);
+  font-weight: 600;
+  font-size: 20px;
+  color: #171717;
+  margin-bottom: 2px;
+}
+
+.main-error.hidden {
+  display: none;
+}
+
+.sub-error {
+	font-family: var(--text-family);
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 24px;
+	letter-spacing: 0;
+	color: var(--dark-gray);
+}
+
+.sub-error.hidden {
+	display: none;
+}
+
+.fixes-panel {
+  background: #FFF1E8;
+  padding: 15px 18px 13px 18px;
+  margin-bottom: 22px;
+  font-family: var(--text-family);
+  font-size: 14px;
+  color: #000000;
+}
+
+.fixes-panel.hidden {
+  display: none;
+}
+
+.fixes-panel strong {
+  color: #000000;
+  color: color(display-p3 0 0 0);
+  font-family: var(--text-family);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.fixes-panel ul {
+  margin: 7px 0 0 0;
+  padding-left: 22px;
+  color: #000000;
+  color: color(display-p3 0 0 0);
+  font-family: var(--text-family);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 171.429% */
+}
+
+.transaction-row {
+  margin: 12px 0 26px 0;
+  display: flex;
+  align-items: center;
+}
+
+.transaction-row.hidden {
+  display: none;
+}
+
+.transaction-label {
+  color: var(--light-gray);
+  font-family: var(--text-family);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.transaction-id {
+  color: #171717;
+  font-family: var(--text-family);
+  font-weight: 600;
+  font-size: 14px;
+  padding-left: 8px;
+}
+
+.action-row {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 20px;
+}
+
+.restart-btn {
+	background: var(--primary-blue);
+	color: #ffffff;
+	font-family: var(--text-family);
+	font-weight: 600;
+	font-size: 14px;
+	line-height: 1;
+	letter-spacing: 0;
+	text-align: center;
+	border: 1px solid #0045DB;
+	border-radius: var(--border-radius-btn);
+	padding: 11px 24px;
+	cursor: pointer;
+	transition: background 0.15s;
+	width: 96px;
+	height: 38px;
+}
+
+.restart-btn:hover {
+  background: #125bc1;
+}
+
+.restart-btn.loading {
+	cursor: not-allowed;
+	pointer-events: none;
+	color: transparent;
+	position: relative;
+}
+
+.restart-btn.loading::after {
+	content: '';
+	position: absolute;
+	width: 16px;
+	height: 16px;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	border: 2px solid rgba(255, 255, 255, 0.4);
+	border-top-color: #ffffff;
+	border-radius: 50%;
+	animation: restart-btn-spinner 0.65s linear infinite;
+}
+
+@keyframes restart-btn-spinner {
+	to {
+		transform: translate(-50%, -50%) rotate(360deg);
+	}
+}
+
+.close-btn {
+	background: none;
+	color: var(--primary-blue);
+	border: none;
+	font-family: var(--text-family);
+	font-size: 14px;
+	font-weight: 600;
+	padding: 11px 16px;
+	cursor: pointer;
+	transition: background 0.15s;
+	width: 128px;
+	height: 38px;
+	min-width: 96px;
+}
+
+.close-btn:hover {
+  background: #f0f5ff;
+}
+
+.download-logs-btn {
+	background: none;
+	color: var(--primary-blue);
+	border: 1px solid var(--primary-blue);
+	border-radius: var(--border-radius-btn);
+	font-family: var(--text-family);
+	font-size: 14px;
+	font-weight: 600;
+	padding: 11px 16px;
+	cursor: pointer;
+	transition: background 0.15s;
+	height: 38px;
+	min-width: 96px;
+	margin-left: auto;
+	white-space: nowrap;
+}
+
+.download-logs-btn:hover {
+  background: #f0f5ff;
+}
+
+.sign-in-btn {
+	background: var(--primary-blue);
+	color: #ffffff;
+	font-family: var(--text-family);
+	font-weight: 600;
+	font-size: 14px;
+	line-height: 1;
+	letter-spacing: 0;
+	text-align: center;
+	border: 1px solid #0045DB;
+	border-radius: var(--border-radius-btn);
+	padding: 11px 24px;
+	cursor: pointer;
+	transition: background 0.15s;
+	height: 38px;
+	min-width: 96px;
+	white-space: nowrap;
+}
+
+.sign-in-btn:hover {
+	background: #125bc1;
+}
+
+.action-row .hidden {
+	display: none;
+}
+
+.footer-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 16px;
+}
+
+/* Accessibility: Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Smooth content appearance animation */
+.popup-body {
+	animation: contentFadeIn 0.4s ease-in-out;
+}
+
+@keyframes contentFadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(8px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}

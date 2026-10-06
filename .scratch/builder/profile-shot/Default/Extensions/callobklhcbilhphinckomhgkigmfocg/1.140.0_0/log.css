@@ -1,0 +1,11 @@
+html, body{
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+#log-buffer {
+  max-height: 88vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  margin-top: 5px;
+}
