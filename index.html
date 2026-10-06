@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#1b4fd6">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Spidey Swing</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; height: 100%; overflow: hidden; background: #8fd0ff;
+    overscroll-behavior: none; touch-action: none;
+    -webkit-user-select: none; user-select: none; -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+    font-family: 'Comic Sans MS', 'Chalkboard SE', 'Trebuchet MS', system-ui, sans-serif;
+    color: #fff;
+  }
+  body { position: fixed; inset: 0; }
+  canvas#scene { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
+  button { font: inherit; cursor: pointer; touch-action: none; }
+  .hidden { display: none !important; }
+  .outline { text-shadow: 0 2px 0 #12306e, 2px 0 0 #12306e, -2px 0 0 #12306e, 0 -2px 0 #12306e, 0 3px 6px rgba(0,0,0,.4); }
+
+  /* Coin icon made with CSS (no image files) */
+  .coin {
+    display: inline-block; width: 1em; height: 1em; border-radius: 50%; flex: none;
+    background: radial-gradient(circle at 35% 30%, #fff7b0 0 12%, #ffd21f 13% 55%, #e09a00 56% 100%);
+    box-shadow: inset 0 0 0 .09em #b87400, 0 .06em 0 #7a4d00;
+  }
+
+  /* ---------- HUD ---------- */
+  #hud {
+    position: fixed; left: 0; right: 0; top: 0; pointer-events: none;
+    padding: calc(env(safe-area-inset-top) + 10px) calc(env(safe-area-inset-right) + 12px) 0 calc(env(safe-area-inset-left) + 12px);
+    display: flex; justify-content: space-between; align-items: flex-start;
+  }
+  #coinBox {
+    display: flex; align-items: center; gap: 10px; font-size: 40px; font-weight: 900; line-height: 1;
+    background: rgba(18, 48, 110, .55); border-radius: 18px; padding: 8px 16px 8px 10px;
+  }
+  #stats { font-size: 15px; font-weight: 800; margin-top: 6px; padding-left: 6px; }
+  #zoneName {
+    position: absolute; left: 50%; transform: translateX(-50%); top: calc(env(safe-area-inset-top) + 14px);
+    font-size: 22px; font-weight: 900; padding: 8px 18px; border-radius: 999px; white-space: nowrap;
+    background: rgba(18, 48, 110, .6); border: 3px solid rgba(255,255,255,.85);
+  }
+  #baseBtn {
+    pointer-events: auto; font-size: 24px; font-weight: 900; color: #fff;
+    background: linear-gradient(#ff4b4b, #c4141c); border: 4px solid #fff; border-radius: 18px;
+    padding: 10px 20px; box-shadow: 0 5px 0 #7d0b10, 0 8px 14px rgba(0,0,0,.3);
+  }
+  #baseBtn:active { transform: translateY(3px); box-shadow: 0 2px 0 #7d0b10; }
+
+  #banner {
+    position: fixed; left: 50%; top: 32%; transform: translate(-50%, -50%) scale(.6); opacity: 0;
+    pointer-events: none; text-align: center; white-space: nowrap;
+    font-size: 44px; font-weight: 900; line-height: 1.1; transition: opacity .25s, transform .25s;
+  }
+  #banner small { display: block; font-size: 26px; margin-top: 6px; color: #fff6a8; }
+  #banner.show { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  #banner.oops { font-size: 80px; color: #ffe14d; }
+
+  #hint {
+    position: fixed; left: 50%; transform: translateX(-50%); pointer-events: none; text-align: center;
+    bottom: calc(env(safe-area-inset-bottom) + 190px); font-size: 22px; font-weight: 900;
+    background: rgba(18, 48, 110, .6); padding: 8px 18px; border-radius: 16px; white-space: nowrap;
+  }
+
+  #popups { position: fixed; inset: 0; pointer-events: none; overflow: hidden; }
+  .popup {
+    position: absolute; transform: translate(-50%, -50%); font-size: 42px; font-weight: 900; color: #ffe14d;
+    display: flex; align-items: center; gap: 6px; animation: rise 1.2s ease-out forwards;
+  }
+  @keyframes rise {
+    0% { opacity: 0; margin-top: 0; transform: translate(-50%, -50%) scale(.5); }
+    15% { opacity: 1; transform: translate(-50%, -50%) scale(1.15); }
+    100% { opacity: 0; margin-top: -90px; transform: translate(-50%, -50%) scale(1); }
+  }
+
+  /* ---------- Controls ---------- */
+  #stick {
+    position: fixed; width: 150px; height: 150px; border-radius: 50%;
+    left: calc(env(safe-area-inset-left) + 22px); bottom: calc(env(safe-area-inset-bottom) + 22px);
+    background: radial-gradient(circle, rgba(255,255,255,.25), rgba(18,48,110,.45));
+    border: 4px solid rgba(255,255,255,.8); touch-action: none;
+  }
+  #knob {
+    position: absolute; left: 50%; top: 50%; width: 66px; height: 66px; margin: -33px 0 0 -33px; border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #ff8080, #d0141c 70%); border: 4px solid #fff;
+    box-shadow: 0 4px 10px rgba(0,0,0,.35); pointer-events: none;
+  }
+  #jumpBtn {
+    position: fixed; width: 136px; height: 136px; border-radius: 50%;
+    right: calc(env(safe-area-inset-right) + 22px); bottom: calc(env(safe-area-inset-bottom) + 26px);
+    font-size: 30px; font-weight: 900; color: #fff; letter-spacing: 1px;
+    background: radial-gradient(circle at 35% 30%, #5d9bff, #1b4fd6 70%); border: 5px solid #fff;
+    box-shadow: 0 7px 0 #0d2a7a, 0 10px 18px rgba(0,0,0,.35);
+  }
+  #jumpBtn.down { transform: translateY(5px); box-shadow: 0 2px 0 #0d2a7a; }
+
+  /* ---------- Overlays ---------- */
+  .overlay {
+    position: fixed; inset: 0; display: flex; align-items: center; justify-content: center;
+    padding: calc(env(safe-area-inset-top) + 10px) calc(env(safe-area-inset-right) + 10px)
+             calc(env(safe-area-inset-bottom) + 10px) calc(env(safe-area-inset-left) + 10px);
+  }
+  #nameScreen { background: linear-gradient(160deg, #e3262e 0%, #e3262e 40%, #1b4fd6 40.2%, #12306e 100%); flex-direction: column; text-align: center; }
+  #nameScreen h1 { margin: 0; font-size: 64px; line-height: 1; letter-spacing: 2px; transform: rotate(-3deg); }
+  #nameScreen h1 span { display: block; font-size: 84px; color: #ffe14d; }
+  #nameScreen p { font-size: 20px; font-weight: 800; margin: 16px 0 22px; }
+  #nameScreen label { font-size: 24px; font-weight: 900; display: block; margin-bottom: 8px; }
+  #nameInput {
+    font: inherit; font-size: 30px; font-weight: 800; text-align: center; width: min(340px, 82vw);
+    padding: 12px; border-radius: 16px; border: 4px solid #fff; color: #12306e; background: #fff;
+    -webkit-user-select: text; user-select: text; touch-action: manipulation;
+  }
+  #playBtn {
+    display: block; margin: 18px auto 0; font-size: 40px; font-weight: 900; color: #12306e;
+    background: linear-gradient(#ffe86b, #ffc400); border: 5px solid #fff; border-radius: 22px;
+    padding: 12px 64px; box-shadow: 0 7px 0 #9a6b00, 0 10px 18px rgba(0,0,0,.35);
+  }
+  #nameHint { min-height: 26px; margin-top: 10px; font-size: 20px; font-weight: 900; color: #ffe14d; }
+
+  #panel { background: rgba(10, 25, 60, .55); }
+  .card {
+    width: min(780px, 100%); max-height: 100%; overflow-y: auto; touch-action: pan-y;
+    background: linear-gradient(#ffffff, #e8f1ff); color: #12306e; border-radius: 26px;
+    border: 5px solid #fff; box-shadow: 0 12px 40px rgba(0,0,0,.45); padding: 18px 20px;
+  }
+  .card-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .card-head h2 { margin: 0; font-size: 40px; color: #d0141c; letter-spacing: 2px; }
+  #pName { font-size: 24px; font-weight: 900; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 12px 0; }
+  .stat { background: #12306e; color: #fff; border-radius: 14px; padding: 8px 6px; text-align: center; }
+  .stat b { display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 26px; line-height: 1.1; }
+  .stat span { font-size: 14px; font-weight: 800; opacity: .85; }
+  .shops { display: grid; grid-template-columns: 1fr 1.25fr; gap: 12px; }
+  .shop { background: #fff; border: 3px solid #b9cdf5; border-radius: 18px; padding: 10px 12px; }
+  .shop h3 { margin: 0 0 4px; font-size: 22px; }
+  .shop .note { font-size: 16px; font-weight: 800; margin-bottom: 8px; color: #3b5590; }
+  .shop-btns { display: flex; gap: 8px; }
+  .buy {
+    flex: 1; min-height: 70px; border-radius: 16px; border: 3px solid #fff; color: #fff;
+    background: linear-gradient(#36c95a, #1d9a3c); box-shadow: 0 5px 0 #11632a;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; padding: 4px;
+  }
+  .buy b { font-size: 26px; line-height: 1; }
+  .buy span { display: flex; align-items: center; gap: 5px; font-size: 20px; font-weight: 900; }
+  .buy:active:not(:disabled) { transform: translateY(3px); box-shadow: 0 2px 0 #11632a; }
+  .buy:disabled { background: #b7bfcc; box-shadow: 0 5px 0 #8a93a3; color: #eef1f6; cursor: not-allowed; }
+  .buy:disabled .coin { filter: grayscale(1); opacity: .7; }
+  .buy.free span { color: #fff36b; }
+  .card-foot { display: flex; gap: 12px; margin-top: 14px; align-items: stretch; }
+  #changeName {
+    font-size: 18px; font-weight: 900; color: #12306e; background: #fff; border: 3px solid #12306e;
+    border-radius: 16px; padding: 8px 14px;
+  }
+  #closePanel {
+    flex: 1; font-size: 36px; font-weight: 900; color: #fff; border: 4px solid #fff; border-radius: 18px;
+    background: linear-gradient(#ff4b4b, #c4141c); box-shadow: 0 6px 0 #7d0b10; padding: 8px;
+  }
+
+  /* Phone portrait: zone name under the coins row */
+  @media (max-width: 560px) {
+    #coinBox { font-size: 32px; }
+    #zoneName { top: calc(env(safe-area-inset-top) + 82px); font-size: 19px; }
+    #baseBtn { font-size: 20px; padding: 9px 14px; }
+    #banner { font-size: 32px; }
+    #banner small { font-size: 20px; }
+    #banner.oops { font-size: 64px; }
+    #hint { font-size: 18px; bottom: calc(env(safe-area-inset-bottom) + 200px); }
+    #stick { width: 136px; height: 136px; left: calc(env(safe-area-inset-left) + 16px); }
+    #jumpBtn { width: 124px; height: 124px; right: calc(env(safe-area-inset-right) + 16px); }
+    #nameScreen h1 { font-size: 48px; }
+    #nameScreen h1 span { font-size: 64px; }
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+    .shops { grid-template-columns: 1fr; }
+    .card-head h2 { font-size: 32px; }
+  }
+  /* Short screens (phone landscape): smaller pieces so everything fits */
+  @media (max-height: 500px) {
+    #coinBox { font-size: 30px; padding: 6px 12px 6px 8px; }
+    #zoneName { font-size: 18px; padding: 6px 14px; top: calc(env(safe-area-inset-top) + 10px); }
+    #baseBtn { font-size: 20px; padding: 7px 14px; }
+    #banner { font-size: 32px; top: 30%; }
+    #banner small { font-size: 20px; }
+    #hint { bottom: calc(env(safe-area-inset-bottom) + 16px); font-size: 18px; }
+    #stick { width: 124px; height: 124px; bottom: calc(env(safe-area-inset-bottom) + 14px); }
+    #knob { width: 56px; height: 56px; margin: -28px 0 0 -28px; }
+    #jumpBtn { width: 112px; height: 112px; font-size: 26px; bottom: calc(env(safe-area-inset-bottom) + 18px); }
+    #nameScreen h1 { font-size: 34px; }
+    #nameScreen h1 span { font-size: 46px; display: inline; }
+    #nameScreen p { margin: 8px 0 10px; font-size: 17px; }
+    #nameScreen label { font-size: 20px; }
+    #nameInput { font-size: 24px; padding: 8px; }
+    #playBtn { font-size: 30px; padding: 6px 50px; margin-top: 10px; }
+    .card { padding: 10px 14px; border-radius: 20px; }
+    .card-head h2 { font-size: 28px; }
+    #pName { font-size: 20px; }
+    .stats-row { margin: 6px 0; }
+    .stat { padding: 4px; }
+    .stat b { font-size: 20px; }
+    .stat span { font-size: 12px; }
+    .shop { padding: 6px 10px; }
+    .shop h3 { font-size: 18px; }
+    .shop .note { font-size: 14px; margin-bottom: 4px; }
+    .buy { min-height: 54px; }
+    .buy b { font-size: 21px; }
+    .buy span { font-size: 17px; }
+    .card-foot { margin-top: 8px; }
+    #closePanel { font-size: 28px; padding: 4px; }
+  }
+</style>
+<script>
+  // Autotest only: catch every error from the very first script on.
+  if (/[?&]autotest/.test(location.search)) {
+    window.__errors = [];
+    window.onerror = function (msg, src, line, col, err) {
+      window.__errors.push(String(msg) + ' @' + String(src).split('/').pop() + ':' + line + ':' + col + (err && err.stack ? ' ' + err.stack : ''));
+    };
+    window.addEventListener('unhandledrejection', function (e) {
+      window.__errors.push('unhandledrejection: ' + String(e.reason && (e.reason.stack || e.reason)));
+    });
+  }
+</script>
+</head>
+<body>
+<canvas id="scene"></canvas>
+
+<div id="hud">
+  <div>
+    <div id="coinBox" class="outline"><span class="coin"></span><span id="coins">0</span></div>
+    <div id="stats" class="outline">JUMP 5 ft · SPEED 0</div>
+  </div>
+  <button id="baseBtn" type="button">BASE</button>
+</div>
+<div id="zoneName" class="outline">BASE</div>
+<div id="hint" class="outline hidden">Tap JUMP to swing!</div>
+<div id="banner" class="outline"></div>
+<div id="popups"></div>
+
+<div id="stick"><div id="knob"></div></div>
+<button id="jumpBtn" type="button" class="outline">JUMP</button>
+
+<div id="panel" class="overlay hidden">
+  <div class="card">
+    <div class="card-head">
+      <h2>BASE</h2>
+      <div id="pName">Player</div>
+    </div>
+    <div class="stats-row">
+      <div class="stat"><b><span class="coin"></span><em id="pCoins" style="font-style:normal">0</em></b><span>COINS</span></div>
+      <div class="stat"><b id="pJump">5 ft</b><span>JUMP</span></div>
+      <div class="stat"><b id="pSpeed">0</b><span>SPEED</span></div>
+      <div class="stat"><b id="pBest">-</b><span>BEST ZONE</span></div>
+    </div>
+    <div class="shops">
+      <div class="shop">
+        <h3>JUMP SHOP</h3>
+        <div class="note" id="jumpNote">Jump further: 5 ft to 10 ft</div>
+        <div class="shop-btns">
+          <button class="buy" id="buyJump" type="button"><b>+5 ft</b><span>100</span></button>
+        </div>
+      </div>
+      <div class="shop">
+        <h3>SPEED SHOP</h3>
+        <div class="note">Walk and swing faster</div>
+        <div class="shop-btns">
+          <button class="buy" id="buySpeed0" type="button"><b>+1</b><span>10</span></button>
+          <button class="buy" id="buySpeed1" type="button"><b>+5</b><span>50</span></button>
+          <button class="buy" id="buySpeed2" type="button"><b>+10</b><span>100</span></button>
+        </div>
+      </div>
+    </div>
+    <div class="card-foot">
+      <button id="changeName" type="button">Change name</button>
+      <button id="closePanel" type="button" class="outline">GO!</button>
+    </div>
+  </div>
+</div>
+
+<div id="nameScreen" class="overlay">
+  <h1 class="outline">SPIDEY<span>SWING</span></h1>
+  <p class="outline">Swing from tower to tower and grab the coins!</p>
+  <label for="nameInput" class="outline">What is your name?</label>
+  <input id="nameInput" type="text" maxlength="16" autocomplete="off" autocapitalize="words" spellcheck="false" enterkeyhint="go">
+  <button id="playBtn" type="button">PLAY</button>
+  <div id="nameHint" class="outline"></div>
+</div>
+
+<script src="three.min.js"></script>
+<script src="logic.js"></script>
+<script src="game.js"></script>
+</body>
+</html>
